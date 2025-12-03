@@ -15,25 +15,27 @@ public class GestorContenedor {
         return contenedores;
     }
     
-    public boolean agregarContenedor(Contenedor t){
-        if(buscarContenedorPorId(t.getId()) != null){
-            return false;
-        }
-        contenedores.add(t);
-        return true;
-    }
-    
     public  Contenedor buscarContenedorPorId(String id){
         for (Contenedor contenedor : contenedores) {
-            if(contenedor.getId().equalsIgnoreCase(id))
+            if(contenedor.getId().equals(id))
                 return contenedor;
         }
         return null;
     }
     
+    public boolean agregarContenedor(Contenedor t){
+        if(buscarContenedorPorId(t.getId()) != null){
+            return false;
+        }
+        
+        contenedores.add(t);
+        return true;
+    }
+    
     public boolean eliminarContenedorPorId(String id){
         Contenedor contenedor = buscarContenedorPorId(id);
         if(contenedor == null) return false;
+        
         contenedores.remove(contenedor);
         return true;
     }
@@ -47,8 +49,7 @@ public class GestorContenedor {
         contenedor.setCapacidadActual(nuevosDatos.getCapacidadActual());
         contenedor.setEstado(nuevosDatos.getEstado());
         contenedor.setColor(nuevosDatos.getColor());
-
-        
+     
         return true;
     }
     
