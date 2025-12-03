@@ -17,7 +17,7 @@ public class GestorPuntoReciclaje {
     
     public PuntoReciclaje buscarPuntoPorId(String id){
         for (PuntoReciclaje punto : puntos) {
-            if(punto.getId().equals(punto)){
+            if(punto.getId().equals(id)){
                 return punto;
             }
         }
@@ -54,17 +54,28 @@ public class GestorPuntoReciclaje {
         return true;
     }
     
-    //Falta
-    public ArrayList<PuntoReciclaje> buscarPorSector(String sector) {
+    public  PuntoReciclaje buscarPorDireccion(String direccion) {
+        for (PuntoReciclaje punto : puntos) {
+            if(punto.getDireccion().equalsIgnoreCase(direccion)){
+                return punto;
+            }
+        }
+        return null;
+    }
+
+    public PuntoReciclaje buscarPuntosDisponibles() {
+        for (PuntoReciclaje punto : puntos) {
+            if(punto.isDisponible()){
+                return punto;
+            }
+        }
+        return null;
+    }
+
+    public int totalContenedoresPorDireccion(String direccion) {
+        PuntoReciclaje punto = buscarPorDireccion(direccion);
+        if(punto == null) return -1;
         
+        return punto.totalContenedores();
     }
-
-    public ArrayList<PuntoReciclaje> buscarPuntosDisponibles() {
-        
-    }
-
-    public int totalContenedoresPorPunto() {
-        return 1;
-    }
-
 }
