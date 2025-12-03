@@ -1,6 +1,6 @@
 package modelo;
 
-public class TipoContenedor {
+public class Contenedor {
     private String id;
     private String tipo;
     private int capacidadMaxima;
@@ -9,7 +9,7 @@ public class TipoContenedor {
     private String color;
     
     //Constructor
-    public TipoContenedor(String id, String tipo, int capacidadMaxima, int capacidadActual, String estado, String color) {
+    public Contenedor(String id, String tipo, int capacidadMaxima, int capacidadActual, String estado, String color) {
         this.setId(id);
         this.setTipo(tipo);
         this.setCapacidadMaxima(capacidadMaxima);
@@ -45,14 +45,14 @@ public class TipoContenedor {
     
     //Setters
     public void setId(String id) {
-        if(id == null || id.trim().isEmpty()){
+        if(id == null || id.isEmpty()){
             throw new IllegalArgumentException("Error: La id no puede estar vacia");
         }
         this.id = id;
     }
 
     public void setTipo(String tipo) {
-        if(!tipo.equalsIgnoreCase("Papel y carton") || !tipo.equalsIgnoreCase("Plastico") || !tipo.equalsIgnoreCase("Vidrio") || !tipo.equalsIgnoreCase("Organico")){
+        if(!tipo.equalsIgnoreCase("Papel y carton") && !tipo.equalsIgnoreCase("Plastico") && !tipo.equalsIgnoreCase("Vidrio") && !tipo.equalsIgnoreCase("Organico")){
             throw new IllegalArgumentException("Error: Solo puede escoger entre (Papel y carton, Plastico, Vidrio, Organico)");
         }
         this.tipo = tipo;
@@ -73,20 +73,24 @@ public class TipoContenedor {
     }
 
     public void setEstado(String estado) {
-        if(!estado.equalsIgnoreCase("Diponible") || !estado.equalsIgnoreCase("Lleno") || !estado.equalsIgnoreCase("Malo")){
+        if(!estado.equalsIgnoreCase("Disponible") && !estado.equalsIgnoreCase("Lleno") && !estado.equalsIgnoreCase("Malo")){
             throw new IllegalArgumentException("Error: Solo puede escoger entre (Disponible, Lleno, Malo)");
         }
         this.estado = estado;
     }
 
     public void setColor(String color) {
-        if(!color.equalsIgnoreCase("Verde") || !color.equalsIgnoreCase("Azul") || !color.equalsIgnoreCase("Amarillo") || !color.equalsIgnoreCase("Cafe")){
+        if(!color.equalsIgnoreCase("Verde")&& !color.equalsIgnoreCase("Azul") && !color.equalsIgnoreCase("Amarillo") && !color.equalsIgnoreCase("Cafe")){
             throw new IllegalArgumentException("Error: Solo puede escoger entre (Verde, Azul, Amarillo, Cafe)");
         }
         this.color = color;
     }
     
     //Metodo
+    public boolean estaLleno() {
+        return capacidadActual == capacidadMaxima;
+    }
+    
     @Override
     public String toString() {
         return "\n==== TipoContenedor ====="
