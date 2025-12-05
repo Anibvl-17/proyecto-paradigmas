@@ -15,9 +15,9 @@ public class GestorHorarioRecoleccion {
         return horarios;
     }
     
-    public HorarioRecoleccion buscarPorId(String id) {
+    public HorarioRecoleccion buscarPorId(int id) {
         for (HorarioRecoleccion h : horarios) {
-            if(h.getId().equals(id)) {
+            if(h.getId() == id) {
                 return h;
             }
         }
@@ -32,7 +32,7 @@ public class GestorHorarioRecoleccion {
         return true;
     }
     
-    public boolean eliminarHorarioPorId(String id) {
+    public boolean eliminarHorarioPorId(int id) {
         HorarioRecoleccion h = buscarPorId(id);
         if(h == null) return false;
 
@@ -40,7 +40,7 @@ public class GestorHorarioRecoleccion {
         return true;
     }
     
-    public boolean actualizarHorarioPorId(String id, HorarioRecoleccion nuevosDatos) {
+    public boolean actualizarHorarioPorId(int id, HorarioRecoleccion nuevosDatos) {
         HorarioRecoleccion original = buscarPorId(id);
         if(original == null) return false;
 
@@ -48,7 +48,7 @@ public class GestorHorarioRecoleccion {
         original.setDiaSemana(nuevosDatos.getDiaSemana());
         original.setHoraInicio(nuevosDatos.getHoraInicio());
         original.setHoraFin(nuevosDatos.getHoraFin());
-        original.setRecolectorId(nuevosDatos.getRecolectorId());
+        original.setTipoResiduo(nuevosDatos.getTipoResiduo());
 
         return true;
     }
