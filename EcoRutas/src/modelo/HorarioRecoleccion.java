@@ -1,7 +1,7 @@
 package modelo;
 
 public class HorarioRecoleccion {
-    private String id;
+    private int id;
     private String sector;
     private String diaSemana;
     private String horaInicio;
@@ -9,7 +9,7 @@ public class HorarioRecoleccion {
     private String recolectorId; //Aca mejor llamar al modelo Usuario
     
     //Constructor
-    public HorarioRecoleccion(String id, String sector, String diaSemana, String horaInicio, String horaFin, String recolectorId) {
+    public HorarioRecoleccion(int id, String sector, String diaSemana, String horaInicio, String horaFin, String recolectorId) {
         this.setId(id);
         this.setSector(sector);
         this.setDiaSemana(diaSemana);
@@ -19,7 +19,7 @@ public class HorarioRecoleccion {
     }
     
     //Getters
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -44,9 +44,9 @@ public class HorarioRecoleccion {
     }
     
     //Setters
-    public void setId(String id) {
-        if (id == null || id.isEmpty()){
-            throw new IllegalArgumentException("Error: El ID no puede estar vacío.");
+    public void setId(int id) {
+        if (id < 1){
+            throw new IllegalArgumentException("Error: El ID no puede ser menor a 1");
         }
         this.id = id;
     }
