@@ -6,16 +6,16 @@ public class HorarioRecoleccion {
     private String diaSemana;
     private String horaInicio;
     private String horaFin;
-    private String recolectorId; //Aca mejor llamar al modelo Usuario
+    private String tipoResiduo;
     
     //Constructor
-    public HorarioRecoleccion(int id, String sector, String diaSemana, String horaInicio, String horaFin, String recolectorId) {
+    public HorarioRecoleccion(int id, String sector, String diaSemana, String horaInicio, String horaFin, String tipoResiduo) {
         this.setId(id);
         this.setSector(sector);
         this.setDiaSemana(diaSemana);
         this.setHoraInicio(horaInicio);
         this.setHoraFin(horaFin);
-        this.setRecolectorId(recolectorId);
+        this.setTipoResiduo(tipoResiduo);
     }
     
     //Getters
@@ -39,8 +39,8 @@ public class HorarioRecoleccion {
         return horaFin;
     }
 
-    public String getRecolectorId() {
-        return recolectorId;
+    public String getTipoResiduo() {
+        return tipoResiduo;
     }
     
     //Setters
@@ -59,7 +59,7 @@ public class HorarioRecoleccion {
     }
 
     public void setDiaSemana(String diaSemana) {
-        String[] dias = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"};
+        String[] dias = {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"};
 
         boolean valido = false;
         for (String dia : dias) {
@@ -89,11 +89,16 @@ public class HorarioRecoleccion {
         this.horaFin = horaFin;
     }
 
-    public void setRecolectorId(String recolectorId) {
-        if (recolectorId == null || recolectorId.isEmpty()){
-            throw new IllegalArgumentException("Error: El ID del recolector no puede estar vacío."); 
+    public void setTipoResiduo(String tipoResiduo) {
+        if (tipoResiduo == null || tipoResiduo.isEmpty()){
+            throw new IllegalArgumentException("Error: El tipo de residuo no puede estar vacío."); 
         }
-        this.recolectorId = recolectorId;
+        
+        if (!tipoResiduo.equals("Orgánico") && !tipoResiduo.equals("General")) {
+            throw new IllegalArgumentException("Error: El tipo de residuo debe ser General u Orgánico");
+        }
+        
+        this.tipoResiduo = tipoResiduo;
     }
     
     //Metodos
@@ -105,7 +110,7 @@ public class HorarioRecoleccion {
              + "\nDía Semana: " + diaSemana
              + "\nHora Inicio: " + horaInicio
              + "\nHora Fin: " + horaFin
-             + "\nRecolector ID: " + recolectorId
+             + "\nTipo Residuo: " + tipoResiduo
              + "\n-----------------------------------------";
     }
 }
