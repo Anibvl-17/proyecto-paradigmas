@@ -22,6 +22,12 @@ public class ControladorPrincipal {
         vistaPrincipal.setVisible(true);
         
         vistaPrincipal.getBtnAccesoFuncionario().addActionListener(e -> mostrarAccesoFuncionarios());
+        vistaPrincipal.getBtnHorarios().addActionListener(e -> mostrarHorarios());
+    }
+    
+    private void mostrarHorarios() {
+        VistaHorarioRec vista = new VistaHorarioRec();
+        vista.setVisible(true);
     }
     
     private void mostrarAccesoFuncionarios() {
