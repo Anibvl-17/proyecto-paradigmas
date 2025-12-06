@@ -1,13 +1,27 @@
 package modelo;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GestorContenedor {
     private ArrayList<Contenedor> contenedores;
     
+    // Agregamos id del punto de reciclaje
+    private String idPunto;
+    
     //Constructor
-    public GestorContenedor() {
+    public GestorContenedor(String idPunto) {
         contenedores = new ArrayList<>();
+        this.idPunto = idPunto;
+    }
+
+    public String getIdPunto() {
+        return idPunto;
     }
    
     //Metodos
@@ -67,5 +81,31 @@ public class GestorContenedor {
             }
         }
         return null;
+    }
+    
+    public void archivar(String nombreArchivo) throws IOException {
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
+            for (Contenedor c : contenedores) {
+                // No se guarda el gestor de contenedores aqui, ya que después se busca por el ID
+                // Cada GestorContenedores tiene un ID de un punto de reciclaje.
+                bw.write(c.getId() + ";" + c.getTipo() + ";" + c.getCapacidadMaxima() + ";" + c.getCapacidadActual() + ";" + c.getEstado() + ";" + c.getColor());
+                bw.newLine();
+            }
+            bw.close();
+        }
+    }
+    
+    // Guarda los contenedores, el archivo incluye el id del punto de reciclaje
+    // para luego poder recuperar la lista de cada punto
+    public void cargarArchivo(String nombreArchivo) throws FileNotFoundException, IOException {
+        contenedores.clear();
+        try (BufferedReader br = new BufferedReader(new FileReader(idPunto + "_" + nombreArchivo))) {
+            String linea;
+            while((linea = br.readLine()) != null) {
+                String partes[] = linea.split(";");
+                contenedores.add(new Contenedor(partes[0], partes[1], Integer.parseInt(partes[2]), Integer.parseInt(partes[3]), partes[4], partes[5]));
+            }
+            br.close();
+        }
     }
 }
