@@ -1,5 +1,11 @@
 package modelo;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GestorPuntoReciclaje {
@@ -77,5 +83,43 @@ public class GestorPuntoReciclaje {
         if(punto == null) return -1;
         
         return punto.totalContenedores();
+    }
+        
+    public void archivar(String nombreArchivo) throws IOException {
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
+            for (PuntoReciclaje p : puntos) {
+                // No se guarda el gestor de contenedores aqui, ya que después se busca por el ID
+                // Cada GestorContenedores tiene un ID de un punto de reciclaje.
+                bw.write(p.getId() + ";" + p.getNombre() + ";" + p.getDireccion() + ";" + p.getSector() + ";" + p.isDisponible());
+                bw.newLine();
+            }
+            bw.close();
+        }
+    }
+    
+    public void cargarArchivo(String nombreArchivo) throws FileNotFoundException, IOException {
+        puntos.clear();
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+            String linea;
+            while((linea = br.readLine()) != null) {
+                String partes[] = linea.split(";");
+                puntos.add(new PuntoReciclaje(partes[0], partes[1], partes[2], partes[3], Boolean.parseBoolean(partes[4]), cargarContenedoresPorIDPunto(partes[0], "_contenedores.txt")));
+            }
+            br.close();
+        }
+    }
+    
+    // Obtiene la lista de contenedores de un determinado punto (segun id)
+    public GestorContenedor cargarContenedoresPorIDPunto(String idPunto, String nombreArchivo) throws IOException {
+        GestorContenedor gestor = new GestorContenedor(idPunto);
+        try (BufferedReader br = new BufferedReader(new FileReader(idPunto + "_" + nombreArchivo))) {
+            String linea;
+            while((linea = br.readLine()) != null) {
+                String partes[] = linea.split(";");
+                gestor.agregarContenedor(new Contenedor(partes[0], partes[1], Integer.parseInt(partes[2]), Integer.parseInt(partes[3]), partes[4], partes[5]));
+            }
+            br.close();
+            return gestor;
+        }
     }
 }

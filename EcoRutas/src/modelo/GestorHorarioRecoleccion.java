@@ -1,5 +1,11 @@
 package modelo;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GestorHorarioRecoleccion {
@@ -15,9 +21,9 @@ public class GestorHorarioRecoleccion {
         return horarios;
     }
     
-    public HorarioRecoleccion buscarPorId(String id) {
+    public HorarioRecoleccion buscarPorId(int id) {
         for (HorarioRecoleccion h : horarios) {
-            if(h.getId().equals(id)) {
+            if(h.getId() == id) {
                 return h;
             }
         }
@@ -32,7 +38,7 @@ public class GestorHorarioRecoleccion {
         return true;
     }
     
-    public boolean eliminarHorarioPorId(String id) {
+    public boolean eliminarHorarioPorId(int id) {
         HorarioRecoleccion h = buscarPorId(id);
         if(h == null) return false;
 
@@ -40,7 +46,7 @@ public class GestorHorarioRecoleccion {
         return true;
     }
     
-    public boolean actualizarHorarioPorId(String id, HorarioRecoleccion nuevosDatos) {
+    public boolean actualizarHorarioPorId(int id, HorarioRecoleccion nuevosDatos) {
         HorarioRecoleccion original = buscarPorId(id);
         if(original == null) return false;
 
@@ -48,7 +54,7 @@ public class GestorHorarioRecoleccion {
         original.setDiaSemana(nuevosDatos.getDiaSemana());
         original.setHoraInicio(nuevosDatos.getHoraInicio());
         original.setHoraFin(nuevosDatos.getHoraFin());
-        original.setRecolectorId(nuevosDatos.getRecolectorId());
+        original.setTipoResiduo(nuevosDatos.getTipoResiduo());
 
         return true;
     }
@@ -69,5 +75,29 @@ public class GestorHorarioRecoleccion {
             }
         }
         return null;  
+    }
+    
+    public void archivar(String nombreArchivo) throws IOException {
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
+            for (HorarioRecoleccion h : horarios) {
+                bw.write(h.getId() + ";" + h.getSector() + ";" + h.getDiaSemana() + ";" + h.getHoraInicio() + ";" + h.getHoraFin() + ";" + h.getTipoResiduo());
+                bw.newLine();
+            }
+            bw.close();
+        }
+    }
+    
+    public void cargarArchivo(String nombreArchivo) throws FileNotFoundException, IOException {
+        horarios.clear();
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+            String linea;
+            while((linea = br.readLine()) != null) {
+                String partes[] = linea.split(";");
+                horarios.add(new HorarioRecoleccion(
+                        Integer.parseInt(partes[0]), partes[1], partes[2], partes[3], partes[4], partes[5]
+                ));
+            }
+            br.close();
+        }
     }
 }
