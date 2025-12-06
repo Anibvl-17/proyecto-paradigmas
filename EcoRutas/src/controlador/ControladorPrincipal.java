@@ -43,7 +43,7 @@ public class ControladorPrincipal {
        String contrasenia = vistaAcceso.getTxtContrasenia().getText();
        
        if (rol.equals(rolInspector) && contrasenia.equals(claveInspector)) {
-           new VistaMensajes().mostrarInfo(null, "Acceso correcto a inspector.");
+           new VistaMensajes().mostrarInfo(null, "Acceso correcto a inspector, programa en desarrollo.");
        } else if (rol.equals(rolEncargado) && contrasenia.equals(claveEncargado)) {
            vistaAcceso.setVisible(false);
            
