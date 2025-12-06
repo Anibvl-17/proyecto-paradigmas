@@ -75,6 +75,7 @@ public class HorarioRecoleccion {
         this.diaSemana = diaSemana;
     }
 
+    // Se debe validar horario entre 8 am y 20 pm (rango de 8 a 20)
     public void setHoraInicio(String horaInicio) {
         if (horaInicio == null || horaInicio.isEmpty()){
             throw new IllegalArgumentException("Error: Hora de inicio no puede estar vacía.");
@@ -82,6 +83,7 @@ public class HorarioRecoleccion {
         this.horaInicio = horaInicio;
     }
 
+    // Se debe validar que la hora fin debe ser mayor a la hora inicio, y cumplir dentro del rango
     public void setHoraFin(String horaFin) {
         if (horaFin == null || horaFin.isEmpty()){
             throw new IllegalArgumentException("Error: Hora de fin no puede estar vacía.");
