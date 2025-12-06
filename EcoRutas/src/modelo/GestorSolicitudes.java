@@ -47,13 +47,14 @@ public class GestorSolicitudes {
         return true;
     }
 
-    public Solicitud buscarPorTipo(String tipo){
+    public ArrayList<Solicitud> buscarPorTipo(String tipo){
+        ArrayList<Solicitud> array = new ArrayList<>();
         for (Solicitud s : solicitudes) {
             if(s.getTipoSolicitud().equalsIgnoreCase(tipo)){
-                return s;
+                array.add(s);
             }
         }
-        return null;
+        return array;
     }
     
     public void archivar(String nombreArchivo) throws IOException {
