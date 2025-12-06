@@ -53,35 +53,35 @@ public class Contenedor {
 
     public void setTipo(String tipo) {
         if(!tipo.equalsIgnoreCase("Papel y carton") && !tipo.equalsIgnoreCase("Plastico") && !tipo.equalsIgnoreCase("Vidrio") && !tipo.equalsIgnoreCase("Organico")){
-            throw new IllegalArgumentException("Error: Solo puede escoger entre (Papel y carton, Plastico, Vidrio, Organico).");
+            throw new IllegalArgumentException("Error: Solo puede escoger tipo entre (Papel y carton, Plastico, Vidrio, Organico).");
         }
         this.tipo = tipo;
     }
 
     public void setCapacidadMaxima(int capacidadMaxima) {
         if(capacidadMaxima < 0){
-            throw new IllegalArgumentException("Error: No puede contener numeros negativos.");
+            throw new IllegalArgumentException("Error: Capcidad máxima no puede contener números negativos.");
         }
         this.capacidadMaxima = capacidadMaxima;
     }
 
     public void setCapacidadActual(int capacidadActual) {
         if(capacidadActual < 0){
-            throw new IllegalArgumentException("Error: No puede contener numeros negativos.");
+            throw new IllegalArgumentException("Error: Capacidad actual no puede contener números negativos.");
         }
         this.capacidadActual = capacidadActual;
     }
 
     public void setEstado(String estado) {
         if(!estado.equalsIgnoreCase("Disponible") && !estado.equalsIgnoreCase("Lleno") && !estado.equalsIgnoreCase("Malo")){
-            throw new IllegalArgumentException("Error: Solo puede escoger entre (Disponible, Lleno, Malo).");
+            throw new IllegalArgumentException("Error: Solo puede escoger estado entre (Disponible, Lleno, Malo).");
         }
         this.estado = estado;
     }
 
     public void setColor(String color) {
         if(!color.equalsIgnoreCase("Verde")&& !color.equalsIgnoreCase("Azul") && !color.equalsIgnoreCase("Amarillo") && !color.equalsIgnoreCase("Cafe")){
-            throw new IllegalArgumentException("Error: Solo puede escoger entre (Verde, Azul, Amarillo, Cafe).");
+            throw new IllegalArgumentException("Error: Solo puede escoger color entre (Verde, Azul, Amarillo, Cafe).");
         }
         this.color = color;
     }
