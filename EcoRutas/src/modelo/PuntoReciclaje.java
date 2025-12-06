@@ -67,7 +67,7 @@ public class PuntoReciclaje {
 
     public void setSector(String sector) {
         if (!sector.equalsIgnoreCase("Urbano") && !sector.equalsIgnoreCase("Rural") && !sector.equalsIgnoreCase("Industrial")) {       
-        throw new IllegalArgumentException("Error: Solo puede escoger entre (Urbano, Rural, Industrial).");
+        throw new IllegalArgumentException("Error: Solo puede escoger sector entre (Urbano, Rural, Industrial).");
         }
         this.sector = sector;
     }
