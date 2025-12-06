@@ -6,6 +6,13 @@ public class Solicitud {
     private String mensaje;
     private String tipoSolicitud;
 
+    public Solicitud(int id, String nombreSolicitante, String mensaje, String tipoSolicitud) {
+        this.setId(id);
+        this.setNombreSolicitante(nombreSolicitante);
+        this.setMensaje(mensaje);
+        this.setTipoSolicitud(tipoSolicitud);
+    }
+
     public int getId() {
         return id;
     }
