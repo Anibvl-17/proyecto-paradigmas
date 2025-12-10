@@ -4,12 +4,12 @@ public class HorarioRecoleccion {
     private int id;
     private String sector;
     private String diaSemana;
-    private String horaInicio;
-    private String horaFin;
+    private int horaInicio;
+    private int horaFin;
     private String tipoResiduo;
     
     //Constructor
-    public HorarioRecoleccion(int id, String sector, String diaSemana, String horaInicio, String horaFin, String tipoResiduo) {
+    public HorarioRecoleccion(int id, String sector, String diaSemana, int horaInicio, int horaFin, String tipoResiduo) {
         this.setId(id);
         this.setSector(sector);
         this.setDiaSemana(diaSemana);
@@ -31,11 +31,11 @@ public class HorarioRecoleccion {
         return diaSemana;
     }
 
-    public String getHoraInicio() {
+    public int getHoraInicio() {
         return horaInicio;
     }
 
-    public String getHoraFin() {
+    public int getHoraFin() {
         return horaFin;
     }
 
@@ -76,17 +76,17 @@ public class HorarioRecoleccion {
     }
 
     // Se debe validar horario entre 8 am y 20 pm (rango de 8 a 20)
-    public void setHoraInicio(String horaInicio) {
-        if (horaInicio == null || horaInicio.isEmpty()){
-            throw new IllegalArgumentException("Error: Hora de inicio no puede estar vacía.");
+    public void setHoraInicio(int horaInicio) {
+        if (horaInicio < 8 || horaInicio > 20){
+            throw new IllegalArgumentException("Error: Hora de inicio debe ser entre 8 y 20 horas");
         }
         this.horaInicio = horaInicio;
     }
 
     // Se debe validar que la hora fin debe ser mayor a la hora inicio, y cumplir dentro del rango
-    public void setHoraFin(String horaFin) {
-        if (horaFin == null || horaFin.isEmpty()){
-            throw new IllegalArgumentException("Error: Hora de fin no puede estar vacía.");
+    public void setHoraFin(int horaFin) {
+        if (horaFin <= horaInicio){
+            throw new IllegalArgumentException("Error: Hora de fin debe ser mayor que hora de inicio");
         }
         this.horaFin = horaFin;
     }
