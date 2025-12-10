@@ -30,17 +30,19 @@ public class ControladorHorarios {
         int id = calcularId();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
         String diaSemana = (String) vista.getComboBoxDia().getSelectedItem();
-        String horaInicio = vista.getTxtHoraInicio().getText();
-        String horaFin = vista.getTxtHoraFin().getText();
         String tipoResiduo = (String) vista.getComboBoxTipoResiduo().getSelectedItem();
 
         try {
+            int horaInicio = Integer.parseInt(vista.getTxtHoraInicio().getText());
+            int horaFin = Integer.parseInt(vista.getTxtHoraFin().getText());
             HorarioRecoleccion h = new HorarioRecoleccion(id, sector, diaSemana, horaInicio, horaFin, tipoResiduo);
 
             modelo.agregarHorario(h);
             listarHorarios();
+        } catch (NumberFormatException e) {
+            vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
         } catch (IllegalArgumentException e) {
-            new VistaMensajes().mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(null, e.getMessage());
         }
     }
 
