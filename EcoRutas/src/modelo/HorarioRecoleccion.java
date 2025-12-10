@@ -75,7 +75,7 @@ public class HorarioRecoleccion {
         this.diaSemana = diaSemana;
     }
 
-    // Se debe validar horario entre 8 am y 20 pm (rango de 8 a 20)
+    // Se debe validar horario entre 8 y 20 (8 am hasta 8 pm)
     public void setHoraInicio(int horaInicio) {
         if (horaInicio < 8 || horaInicio > 20){
             throw new IllegalArgumentException("Error: Hora de inicio debe ser entre 8 y 20 horas");
@@ -83,9 +83,10 @@ public class HorarioRecoleccion {
         this.horaInicio = horaInicio;
     }
 
-    // Se debe validar que la hora fin debe ser mayor a la hora inicio, y cumplir dentro del rango
+    // Se debe validar que la hora fin debe ser mayor a la hora inicio
+    // Ademas, la hora fin puede terminar 1 hora más tarde que la ultima hora inicio (9 pm = 21)
     public void setHoraFin(int horaFin) {
-        if (horaFin <= horaInicio){
+        if (horaFin <= horaInicio || horaFin > 21){
             throw new IllegalArgumentException("Error: Hora de fin debe ser mayor que hora de inicio");
         }
         this.horaFin = horaFin;
