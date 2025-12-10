@@ -4,12 +4,12 @@ public class HorarioRecoleccion {
     private int id;
     private String sector;
     private String diaSemana;
-    private String horaInicio;
-    private String horaFin;
+    private int horaInicio;
+    private int horaFin;
     private String tipoResiduo;
     
     //Constructor
-    public HorarioRecoleccion(int id, String sector, String diaSemana, String horaInicio, String horaFin, String tipoResiduo) {
+    public HorarioRecoleccion(int id, String sector, String diaSemana, int horaInicio, int horaFin, String tipoResiduo) {
         this.setId(id);
         this.setSector(sector);
         this.setDiaSemana(diaSemana);
@@ -31,11 +31,11 @@ public class HorarioRecoleccion {
         return diaSemana;
     }
 
-    public String getHoraInicio() {
+    public int getHoraInicio() {
         return horaInicio;
     }
 
-    public String getHoraFin() {
+    public int getHoraFin() {
         return horaFin;
     }
 
@@ -75,16 +75,23 @@ public class HorarioRecoleccion {
         this.diaSemana = diaSemana;
     }
 
-    public void setHoraInicio(String horaInicio) {
-        if (horaInicio == null || horaInicio.isEmpty()){
-            throw new IllegalArgumentException("Error: Hora de inicio no puede estar vacía.");
+    // Se debe validar horario entre 8 y 20 (8 am hasta 8 pm)
+    public void setHoraInicio(int horaInicio) {
+        if (horaInicio < 8 || horaInicio > 20){
+            throw new IllegalArgumentException("Error: Hora de inicio debe ser entre 8 y 20 horas");
         }
         this.horaInicio = horaInicio;
     }
 
-    public void setHoraFin(String horaFin) {
-        if (horaFin == null || horaFin.isEmpty()){
-            throw new IllegalArgumentException("Error: Hora de fin no puede estar vacía.");
+    // Se debe validar que la hora fin debe ser mayor a la hora inicio
+    // Ademas, la hora fin puede terminar 1 hora más tarde que la ultima hora inicio (9 pm = 21)
+    public void setHoraFin(int horaFin) {
+        if (horaFin <= horaInicio){
+            throw new IllegalArgumentException("Error: Hora de fin debe ser mayor que hora de inicio");
+        }
+        
+        if (horaFin > 21) {
+            throw new IllegalArgumentException("Error: Hora de fin debe ser menor o igual a 21");
         }
         this.horaFin = horaFin;
     }

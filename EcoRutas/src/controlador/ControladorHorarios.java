@@ -8,10 +8,13 @@ public class ControladorHorarios {
 
     private VistaGestionHorarioRec vista;
     private GestorHorarioRecoleccion modelo;
+    
+    private VistaMensajes vistaMensajes;
 
     public ControladorHorarios(GestorHorarioRecoleccion modelo, VistaGestionHorarioRec vista) {
         this.vista = vista;
         this.modelo = modelo;
+        vistaMensajes = new VistaMensajes();
     }
 
     public void iniciar() {
@@ -20,23 +23,26 @@ public class ControladorHorarios {
         // Asignacion de funciones a botones
         vista.getBtnCrear().addActionListener(e -> agregarHorario());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
+        vista.getBtnEliminar().addActionListener(e -> eliminarHorario());
     }
 
     private void agregarHorario() {
         int id = calcularId();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
         String diaSemana = (String) vista.getComboBoxDia().getSelectedItem();
-        String horaInicio = vista.getTxtHoraInicio().getText();
-        String horaFin = vista.getTxtHoraFin().getText();
         String tipoResiduo = (String) vista.getComboBoxTipoResiduo().getSelectedItem();
 
         try {
+            int horaInicio = Integer.parseInt(vista.getTxtHoraInicio().getText());
+            int horaFin = Integer.parseInt(vista.getTxtHoraFin().getText());
             HorarioRecoleccion h = new HorarioRecoleccion(id, sector, diaSemana, horaInicio, horaFin, tipoResiduo);
 
             modelo.agregarHorario(h);
             listarHorarios();
+        } catch (NumberFormatException e) {
+            vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
         } catch (IllegalArgumentException e) {
-            new VistaMensajes().mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(null, e.getMessage());
         }
     }
 
@@ -46,6 +52,7 @@ public class ControladorHorarios {
 
         for (HorarioRecoleccion horario : modelo.listarHorarios()) {
             m.addRow(new Object[]{
+                horario.getId(),
                 horario.getSector(),
                 horario.getDiaSemana(),
                 horario.getHoraInicio(),
@@ -82,8 +89,26 @@ public class ControladorHorarios {
         return modelo.listarHorarios().get(cantidadHorarios - 1).getId() + 1;
     }
     
+    private void eliminarHorario() {
+        try {
+            int id = Integer.parseInt(vista.getTxtId().getText());
+            
+            if (!modelo.eliminarHorarioPorId(id)) {
+                vistaMensajes.mostrarError(null, "No existen horarios con id " + id);
+                return;
+            }
+            
+            modelo.eliminarHorarioPorId(id);
+            listarHorarios(); // Actualiza la lista automaticamente
+            vistaMensajes.mostrarInfo(null, "Horario eliminado exitosamente");
+        } catch (NumberFormatException e) {
+            vistaMensajes.mostrarError(null, "Error: El ID debe ser un número");
+        } catch (IllegalArgumentException e) {
+            vistaMensajes.mostrarError(null, e.getMessage());
+        }
+    }
+    
     // Pendientes:
-    // - Eliminar
     // - Editar
     // - Filtrar
     // - Cargar desde archivo

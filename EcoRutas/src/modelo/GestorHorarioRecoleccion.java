@@ -94,7 +94,7 @@ public class GestorHorarioRecoleccion {
             while((linea = br.readLine()) != null) {
                 String partes[] = linea.split(";");
                 horarios.add(new HorarioRecoleccion(
-                        Integer.parseInt(partes[0]), partes[1], partes[2], partes[3], partes[4], partes[5]
+                        Integer.parseInt(partes[0]), partes[1], partes[2], Integer.parseInt(partes[3]), Integer.parseInt(partes[4]), partes[5]
                 ));
             }
             br.close();
