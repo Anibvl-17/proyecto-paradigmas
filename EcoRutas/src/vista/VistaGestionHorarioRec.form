@@ -354,8 +354,8 @@
                     <Column editable="false" title="ID" type="java.lang.Integer"/>
                     <Column editable="false" title="Sector" type="java.lang.String"/>
                     <Column editable="false" title="Dia" type="java.lang.String"/>
-                    <Column editable="false" title="Hora Inicio" type="java.lang.String"/>
-                    <Column editable="false" title="Hora Fin" type="java.lang.String"/>
+                    <Column editable="false" title="Hora Inicio" type="java.lang.Integer"/>
+                    <Column editable="false" title="Hora Fin" type="java.lang.Integer"/>
                     <Column editable="false" title="Tipo Residuo" type="java.lang.String"/>
                   </Table>
                 </Property>
