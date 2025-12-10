@@ -107,7 +107,6 @@ public class ControladorHorarios {
     }
     
     // Pendientes:
-    // - Eliminar
     // - Editar
     // - Filtrar
     // - Cargar desde archivo
