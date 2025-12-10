@@ -86,8 +86,12 @@ public class HorarioRecoleccion {
     // Se debe validar que la hora fin debe ser mayor a la hora inicio
     // Ademas, la hora fin puede terminar 1 hora más tarde que la ultima hora inicio (9 pm = 21)
     public void setHoraFin(int horaFin) {
-        if (horaFin <= horaInicio || horaFin > 21){
+        if (horaFin <= horaInicio){
             throw new IllegalArgumentException("Error: Hora de fin debe ser mayor que hora de inicio");
+        }
+        
+        if (horaFin > 21) {
+            throw new IllegalArgumentException("Error: Hora de fin debe ser menor o igual a 21");
         }
         this.horaFin = horaFin;
     }
