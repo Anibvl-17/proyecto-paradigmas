@@ -73,8 +73,8 @@ public class Contenedor {
     }
 
     public void setEstado(String estado) {
-        if(!estado.equalsIgnoreCase("Disponible") && !estado.equalsIgnoreCase("Lleno") && !estado.equalsIgnoreCase("Malo")){
-            throw new IllegalArgumentException("Error: Solo puede escoger estado entre (Disponible, Lleno, Malo).");
+        if(!estado.equalsIgnoreCase("Bueno") && !estado.equalsIgnoreCase("Con daños")){
+            throw new IllegalArgumentException("Error: Solo puede escoger estado entre (Bueno, Con daños).");
         }
         this.estado = estado;
     }
