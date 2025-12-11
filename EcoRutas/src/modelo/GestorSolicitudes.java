@@ -18,7 +18,7 @@ public class GestorSolicitudes {
 
    
     //Metodos
-    public ArrayList<Solicitud> listarContenedores() {
+    public ArrayList<Solicitud> listarSolicitudes() {
         return solicitudes;
     }
     
