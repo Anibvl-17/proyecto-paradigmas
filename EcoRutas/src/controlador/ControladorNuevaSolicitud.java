@@ -13,6 +13,9 @@ public class ControladorNuevaSolicitud {
     }
     
     public void iniciar() {
+        vista.pack();
+        vista.setLocationRelativeTo(null);
+        
         vista.setVisible(true);
         
         // Definir botones con sus respectivas funciones

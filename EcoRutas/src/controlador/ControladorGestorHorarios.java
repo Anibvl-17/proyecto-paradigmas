@@ -4,20 +4,23 @@ import javax.swing.table.DefaultTableModel;
 import vista.*;
 import modelo.*;
 
-public class ControladorHorarios {
+public class ControladorGestorHorarios {
 
     private VistaGestionHorarioRec vista;
     private GestorHorarioRecoleccion modelo;
     
     private VistaMensajes vistaMensajes;
 
-    public ControladorHorarios(GestorHorarioRecoleccion modelo, VistaGestionHorarioRec vista) {
+    public ControladorGestorHorarios(GestorHorarioRecoleccion modelo, VistaGestionHorarioRec vista) {
         this.vista = vista;
         this.modelo = modelo;
         vistaMensajes = new VistaMensajes();
     }
 
     public void iniciar() {
+        vista.pack();
+        vista.setLocationRelativeTo(null);
+        
         vista.setVisible(true);
 
         // Asignacion de funciones a botones

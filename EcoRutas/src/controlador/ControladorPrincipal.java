@@ -13,6 +13,10 @@ public class ControladorPrincipal {
     }
     
     public void iniciar() {
+        // pack() y setLocationRelativeTo(null) permiten centrar la vista.
+        vistaPrincipal.pack();
+        vistaPrincipal.setLocationRelativeTo(null);
+        
         vistaPrincipal.setVisible(true);
         
         vistaPrincipal.getBtnAccesoFuncionario().addActionListener(e -> mostrarAccesoFuncionarios());
