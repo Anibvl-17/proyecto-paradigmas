@@ -10,12 +10,13 @@ import java.util.ArrayList;
 
 public class GestorSolicitudes {
     private ArrayList<Solicitud> solicitudes;
+    private String nombreArchivo;
     
     //Constructor
     public GestorSolicitudes() {
         solicitudes = new ArrayList<>();
+        nombreArchivo = "solicitudes.txt";
     }
-
    
     //Metodos
     public ArrayList<Solicitud> listarSolicitudes() {

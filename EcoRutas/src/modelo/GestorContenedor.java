@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class GestorContenedor {
     private ArrayList<Contenedor> contenedores;
+    private String nombreArchivo;
     
     // Agregamos id del punto de reciclaje
     private String idPunto;
@@ -18,6 +19,7 @@ public class GestorContenedor {
     public GestorContenedor(String idPunto) {
         contenedores = new ArrayList<>();
         this.idPunto = idPunto;
+        nombreArchivo = idPunto + "_" + "contenedores.txt";
     }
 
     public String getIdPunto() {
@@ -83,11 +85,9 @@ public class GestorContenedor {
         return null;
     }
     
-    public void archivar(String nombreArchivo) throws IOException {
+    public void archivar() throws IOException {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (Contenedor c : contenedores) {
-                // No se guarda el gestor de contenedores aqui, ya que después se busca por el ID
-                // Cada GestorContenedores tiene un ID de un punto de reciclaje.
                 bw.write(c.getId() + ";" + c.getTipo() + ";" + c.getCapacidadMaxima() + ";" + c.getCapacidadActual() + ";" + c.getEstado() + ";" + c.getColor());
                 bw.newLine();
             }
@@ -97,9 +97,9 @@ public class GestorContenedor {
     
     // Guarda los contenedores, el archivo incluye el id del punto de reciclaje
     // para luego poder recuperar la lista de cada punto
-    public void cargarArchivo(String nombreArchivo) throws FileNotFoundException, IOException {
+    public void cargarArchivo() throws FileNotFoundException, IOException {
         contenedores.clear();
-        try (BufferedReader br = new BufferedReader(new FileReader(idPunto + "_" + nombreArchivo))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;
             while((linea = br.readLine()) != null) {
                 String partes[] = linea.split(";");
