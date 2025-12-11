@@ -42,24 +42,20 @@ public class VistaGestionSolicitudes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSolicitudes = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gestión de Solicitudes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel1.setText("Revise los reclamos y sugerencias enviados por la comunidad.");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel2.setText("Para eliminar una solicitud, debe ingresar un ID");
 
-        txtId.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
             }
         });
 
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,15 +63,12 @@ public class VistaGestionSolicitudes extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel3.setText("ID");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel4.setText("Seleccione los tipos de solicitud que desea ver a continuación");
 
-        checkboxReclamos.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         checkboxReclamos.setText("Reclamos");
         checkboxReclamos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +76,6 @@ public class VistaGestionSolicitudes extends javax.swing.JFrame {
             }
         });
 
-        checkboxSugerencias.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         checkboxSugerencias.setText("Sugerencias");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -138,8 +130,6 @@ public class VistaGestionSolicitudes extends javax.swing.JFrame {
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de solicitudes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-
-        jScrollPane1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         tablaSolicitudes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
