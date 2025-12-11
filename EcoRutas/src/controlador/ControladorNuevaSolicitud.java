@@ -1,5 +1,6 @@
 package controlador;
 
+import java.io.IOException;
 import modelo.*;
 import vista.*;
 
@@ -32,10 +33,13 @@ public class ControladorNuevaSolicitud {
         
         try {
             modelo.agregarSolicitud(new Solicitud(calcularId(), nombre, mensaje, tipoSolicitud));
+            modelo.archivar();
             vistaMensajes.mostrarInfo(null, "Solicitud creada exitosamente");
         } catch (IllegalArgumentException e) {
             vistaMensajes.mostrarError(null, e.getMessage());
-        }
+        } catch (IOException ex) {
+            vistaMensajes.mostrarError(null, "Error al guardar solicitud.");
+        } 
     }
     
     private void limpiarFormulario() {
