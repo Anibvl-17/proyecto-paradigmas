@@ -34,7 +34,9 @@ public class ControladorPrincipal {
     
     private void mostrarHorarios() {
         VistaHorarioRec vista = new VistaHorarioRec();
-        vista.setVisible(true);
+        GestorHorarioRecoleccion modelo = new GestorHorarioRecoleccion();
+        ControladorVerHorarios controlador = new ControladorVerHorarios(modelo, vista);
+        controlador.iniciar();
     }
     
     private void mostrarAccesoFuncionarios() {
