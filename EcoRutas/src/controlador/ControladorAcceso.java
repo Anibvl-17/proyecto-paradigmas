@@ -18,6 +18,9 @@ public class ControladorAcceso {
     }
 
     public void iniciar() {
+        vista.pack();
+        vista.setLocationRelativeTo(null);
+        
         vista.setVisible(true);
 
         vista.getBtnAcceder().addActionListener(e -> verificarAcceso());
@@ -42,7 +45,7 @@ public class ControladorAcceso {
     public void mostrarVistaEncargado() {
         GestorHorarioRecoleccion modeloGestorHorario = new GestorHorarioRecoleccion();
         VistaGestionHorarioRec vistaGestorHorario = new VistaGestionHorarioRec();
-        ControladorHorarios controladorGestorHorarios = new ControladorHorarios(modeloGestorHorario, vistaGestorHorario);
+        ControladorGestorHorarios controladorGestorHorarios = new ControladorGestorHorarios(modeloGestorHorario, vistaGestorHorario);
 
         controladorGestorHorarios.iniciar();
     }

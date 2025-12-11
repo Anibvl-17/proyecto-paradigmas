@@ -13,6 +13,10 @@ public class ControladorPrincipal {
     }
     
     public void iniciar() {
+        // pack() y setLocationRelativeTo(null) permiten centrar la vista.
+        vistaPrincipal.pack();
+        vistaPrincipal.setLocationRelativeTo(null);
+        
         vistaPrincipal.setVisible(true);
         
         vistaPrincipal.getBtnAccesoFuncionario().addActionListener(e -> mostrarAccesoFuncionarios());
@@ -30,7 +34,9 @@ public class ControladorPrincipal {
     
     private void mostrarHorarios() {
         VistaHorarioRec vista = new VistaHorarioRec();
-        vista.setVisible(true);
+        GestorHorarioRecoleccion modelo = new GestorHorarioRecoleccion();
+        ControladorVerHorarios controlador = new ControladorVerHorarios(modelo, vista);
+        controlador.iniciar();
     }
     
     private void mostrarAccesoFuncionarios() {

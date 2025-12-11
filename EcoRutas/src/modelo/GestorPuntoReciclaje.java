@@ -11,9 +11,15 @@ import java.util.ArrayList;
 public class GestorPuntoReciclaje {
     private ArrayList<PuntoReciclaje> puntos;
     
+    private String nombreArchivoPuntos;
+    private String nombreArchivoContenedores;
+    
     //Contructor
     public GestorPuntoReciclaje() {
         puntos = new ArrayList<>();
+        nombreArchivoPuntos = "puntos_reciclaje.txt";
+        // Se le agrega el ID en cargarContenedoresPorIDPunto()
+        nombreArchivoContenedores = "_contenedores.txt";
     }
     
     //Metodos
@@ -97,22 +103,22 @@ public class GestorPuntoReciclaje {
         }
     }
     
-    public void cargarArchivo(String nombreArchivo) throws FileNotFoundException, IOException {
+    public void cargarArchivo() throws FileNotFoundException, IOException {
         puntos.clear();
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivoPuntos))) {
             String linea;
             while((linea = br.readLine()) != null) {
                 String partes[] = linea.split(";");
-                puntos.add(new PuntoReciclaje(partes[0], partes[1], partes[2], partes[3], Boolean.parseBoolean(partes[4]), cargarContenedoresPorIDPunto(partes[0], "_contenedores.txt")));
+                puntos.add(new PuntoReciclaje(partes[0], partes[1], partes[2], partes[3], Boolean.parseBoolean(partes[4]), cargarContenedoresPorIDPunto(partes[0])));
             }
             br.close();
         }
     }
     
     // Obtiene la lista de contenedores de un determinado punto (segun id)
-    public GestorContenedor cargarContenedoresPorIDPunto(String idPunto, String nombreArchivo) throws IOException {
+    public GestorContenedor cargarContenedoresPorIDPunto(String idPunto) throws IOException {
         GestorContenedor gestor = new GestorContenedor(idPunto);
-        try (BufferedReader br = new BufferedReader(new FileReader(idPunto + "_" + nombreArchivo))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(idPunto + nombreArchivoContenedores))) {
             String linea;
             while((linea = br.readLine()) != null) {
                 String partes[] = linea.split(";");

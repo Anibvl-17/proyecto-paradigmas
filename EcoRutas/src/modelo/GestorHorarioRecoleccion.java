@@ -10,10 +10,12 @@ import java.util.ArrayList;
 
 public class GestorHorarioRecoleccion {
     private ArrayList<HorarioRecoleccion> horarios;
+    private String nombreArchivo;
     
     //Constructor
     public GestorHorarioRecoleccion() {
         horarios = new ArrayList<>();
+        nombreArchivo = "horarios.txt";
     }
     
     //Metodos
@@ -77,7 +79,7 @@ public class GestorHorarioRecoleccion {
         return null;  
     }
     
-    public void archivar(String nombreArchivo) throws IOException {
+    public void archivar() throws IOException {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (HorarioRecoleccion h : horarios) {
                 bw.write(h.getId() + ";" + h.getSector() + ";" + h.getDiaSemana() + ";" + h.getHoraInicio() + ";" + h.getHoraFin() + ";" + h.getTipoResiduo());
@@ -87,7 +89,7 @@ public class GestorHorarioRecoleccion {
         }
     }
     
-    public void cargarArchivo(String nombreArchivo) throws FileNotFoundException, IOException {
+    public void cargarArchivo() throws FileNotFoundException, IOException {
         horarios.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;

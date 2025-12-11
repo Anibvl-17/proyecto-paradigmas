@@ -13,6 +13,9 @@ public class ControladorPuntoReciclaje {
     }
     
     public void iniciar() {
+        vista.pack();
+        vista.setLocationRelativeTo(null);
+        
         vista.setVisible(true);
         
         // Asignar funciones a botones
