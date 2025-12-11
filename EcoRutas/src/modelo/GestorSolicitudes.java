@@ -58,7 +58,7 @@ public class GestorSolicitudes {
         return array;
     }
     
-    public void archivar(String nombreArchivo) throws IOException {
+    public void archivar() throws IOException {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (Solicitud s : solicitudes) {
                 bw.write(s.getId() + ";" + s.getNombreSolicitante() + ";" + s.getMensaje() + ";" + s.getTipoSolicitud());
@@ -68,7 +68,7 @@ public class GestorSolicitudes {
         }
     }
 
-    public void cargarArchivo(String nombreArchivo) throws FileNotFoundException, IOException {
+    public void cargarArchivo() throws FileNotFoundException, IOException {
         solicitudes.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;
