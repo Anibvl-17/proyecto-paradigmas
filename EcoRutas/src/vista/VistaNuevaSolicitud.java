@@ -41,6 +41,7 @@ public class VistaNuevaSolicitud extends javax.swing.JFrame {
         comboBoxTipo = new javax.swing.JComboBox<>();
         txtMensaje = new javax.swing.JTextField();
         btnCrear = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -59,6 +60,8 @@ public class VistaNuevaSolicitud extends javax.swing.JFrame {
         comboBoxTipo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnCrear.setText("Crear solicitud");
+
+        btnLimpiar.setText("Limpiar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,6 +87,8 @@ public class VistaNuevaSolicitud extends javax.swing.JFrame {
                         .addComponent(comboBoxTipo, 0, 127, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnLimpiar)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
         );
@@ -103,7 +108,9 @@ public class VistaNuevaSolicitud extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnCrear)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrear)
+                    .addComponent(btnLimpiar))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -167,11 +174,14 @@ public class VistaNuevaSolicitud extends javax.swing.JFrame {
     public JTextField getTxtNombre() {
         return txtNombre;
     }
-    
-    
+
+    public JButton getBtnLimpiar() {
+        return btnLimpiar;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<String> comboBoxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
