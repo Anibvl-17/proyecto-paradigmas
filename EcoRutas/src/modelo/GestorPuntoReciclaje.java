@@ -27,9 +27,9 @@ public class GestorPuntoReciclaje {
         return puntos;
     }
     
-    public PuntoReciclaje buscarPuntoPorId(String id){
+    public PuntoReciclaje buscarPuntoPorId(int id){
         for (PuntoReciclaje punto : puntos) {
-            if(punto.getId().equals(id)){
+            if(punto.getId() == id){
                 return punto;
             }
         }
@@ -45,7 +45,7 @@ public class GestorPuntoReciclaje {
         return true;
     }
     
-    public boolean eliminarPuntoPorId(String id){
+    public boolean eliminarPuntoPorId(int id){
         PuntoReciclaje punto = buscarPuntoPorId(id);
         if(punto == null) return false;
         
@@ -53,7 +53,7 @@ public class GestorPuntoReciclaje {
         return true;
     }
     
-    public boolean actualizarPuntoPorId(String id, PuntoReciclaje nuevosDatos){
+    public boolean actualizarPuntoPorId(int id, PuntoReciclaje nuevosDatos){
         PuntoReciclaje punto = buscarPuntoPorId(id);
         if(punto == null) return false;
         
@@ -109,20 +109,38 @@ public class GestorPuntoReciclaje {
             String linea;
             while((linea = br.readLine()) != null) {
                 String partes[] = linea.split(";");
-                puntos.add(new PuntoReciclaje(partes[0], partes[1], partes[2], partes[3], Boolean.parseBoolean(partes[4]), cargarContenedoresPorIDPunto(partes[0])));
+                puntos.add(
+                    new PuntoReciclaje(
+                        Integer.parseInt(partes[0]),
+                        partes[1],
+                        partes[2],
+                        partes[3],
+                        Boolean.parseBoolean(partes[4]),
+                        cargarContenedoresPorIDPunto(Integer.parseInt(partes[0]))
+                    )
+                );
             }
             br.close();
         }
     }
     
     // Obtiene la lista de contenedores de un determinado punto (segun id)
-    public GestorContenedor cargarContenedoresPorIDPunto(String idPunto) throws IOException {
+    public GestorContenedor cargarContenedoresPorIDPunto(int idPunto) throws IOException {
         GestorContenedor gestor = new GestorContenedor(idPunto);
         try (BufferedReader br = new BufferedReader(new FileReader(idPunto + nombreArchivoContenedores))) {
             String linea;
             while((linea = br.readLine()) != null) {
                 String partes[] = linea.split(";");
-                gestor.agregarContenedor(new Contenedor(partes[0], partes[1], Integer.parseInt(partes[2]), Integer.parseInt(partes[3]), partes[4], partes[5]));
+                gestor.agregarContenedor(
+                    new Contenedor(
+                        partes[0], 
+                        partes[1], 
+            Integer.parseInt(partes[2]),
+            Integer.parseInt(partes[3]), 
+                        partes[4], 
+                        partes[5]
+                    )
+                );
             }
             br.close();
             return gestor;

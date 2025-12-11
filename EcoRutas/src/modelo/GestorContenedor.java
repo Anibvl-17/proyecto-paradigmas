@@ -13,16 +13,16 @@ public class GestorContenedor {
     private String nombreArchivo;
     
     // Agregamos id del punto de reciclaje
-    private String idPunto;
+    private int idPunto;
     
     //Constructor
-    public GestorContenedor(String idPunto) {
+    public GestorContenedor(int idPunto) {
         contenedores = new ArrayList<>();
         this.idPunto = idPunto;
         nombreArchivo = idPunto + "_" + "contenedores.txt";
     }
 
-    public String getIdPunto() {
+    public int getIdPunto() {
         return idPunto;
     }
    

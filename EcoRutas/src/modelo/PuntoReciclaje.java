@@ -1,7 +1,7 @@
 package modelo;
 
 public class PuntoReciclaje {
-    private String id;
+    private int id;
     private String nombre;
     private String direccion;
     private String sector;
@@ -9,7 +9,7 @@ public class PuntoReciclaje {
     private GestorContenedor contenedores;
     
     //Constructor
-    public PuntoReciclaje(String id, String nombre, String direccion, String sector, boolean disponible, GestorContenedor contenedores) {
+    public PuntoReciclaje(int id, String nombre, String direccion, String sector, boolean disponible, GestorContenedor contenedores) {
         this.setId(id);
         this.setNombre(nombre);
         this.setDireccion(direccion);
@@ -19,7 +19,7 @@ public class PuntoReciclaje {
     }
     
     //Getters
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -44,10 +44,11 @@ public class PuntoReciclaje {
     }
     
     //Setters
-    public void setId(String id) {
-        if(id == null || id.isEmpty()){
-            throw new IllegalArgumentException("Error: La id no puede estar vacia.");
+    public void setId(int id) {
+        if (id < 1) {
+            throw new IllegalArgumentException("Error: La id debe ser mayor a 1");
         }
+        
         this.id = id;
     }
 
