@@ -1,7 +1,7 @@
 package modelo;
 
 public class Contenedor {
-    private String id;
+    private int id;
     private String tipo;
     private int capacidadMaxima;
     private int capacidadActual;
@@ -9,7 +9,7 @@ public class Contenedor {
     private String color;
     
     //Constructor
-    public Contenedor(String id, String tipo, int capacidadMaxima, int capacidadActual, String estado, String color) {
+    public Contenedor(int id, String tipo, int capacidadMaxima, int capacidadActual, String estado, String color) {
         this.setId(id);
         this.setTipo(tipo);
         this.setCapacidadMaxima(capacidadMaxima);
@@ -19,7 +19,7 @@ public class Contenedor {
     }
     
     //Getters
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -44,15 +44,16 @@ public class Contenedor {
     }
     
     //Setters
-    public void setId(String id) {
-        if(id == null || id.isEmpty()){
-            throw new IllegalArgumentException("Error: La id no puede estar vacia.");
+    public void setId(int id) {
+        if (id < 1){
+            throw new IllegalArgumentException("Error: La ID debe ser mayor a 1");
         }
+        
         this.id = id;
     }
 
     public void setTipo(String tipo) {
-        if(!tipo.equalsIgnoreCase("Papel y carton") && !tipo.equalsIgnoreCase("Plastico") && !tipo.equalsIgnoreCase("Vidrio") && !tipo.equalsIgnoreCase("Organico")){
+        if(!tipo.equalsIgnoreCase("Papel y cartón") && !tipo.equalsIgnoreCase("Plástico") && !tipo.equalsIgnoreCase("Vidrio") && !tipo.equalsIgnoreCase("Orgánico")){
             throw new IllegalArgumentException("Error: Solo puede escoger tipo entre (Papel y carton, Plastico, Vidrio, Organico).");
         }
         this.tipo = tipo;

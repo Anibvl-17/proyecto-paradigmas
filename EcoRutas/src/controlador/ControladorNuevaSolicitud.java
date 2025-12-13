@@ -57,12 +57,12 @@ public class ControladorNuevaSolicitud {
     
     // Calcula la id de la solicitud segun la última solicitud de la lista.
     private int calcularId() {
-        int cantidadHorarios = modelo.listarSolicitudes().size();
+        int cantidadSolicitudes = modelo.listarSolicitudes().size();
 
-        if (cantidadHorarios == 0) {
+        if (cantidadSolicitudes == 0) {
             return 1;
         }
 
-        return modelo.listarSolicitudes().get(cantidadHorarios - 1).getId() + 1;
+        return modelo.listarSolicitudes().get(cantidadSolicitudes - 1).getId() + 1;
     }
 }

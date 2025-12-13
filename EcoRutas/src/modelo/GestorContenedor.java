@@ -13,16 +13,16 @@ public class GestorContenedor {
     private String nombreArchivo;
     
     // Agregamos id del punto de reciclaje
-    private String idPunto;
+    private int idPunto;
     
     //Constructor
-    public GestorContenedor(String idPunto) {
+    public GestorContenedor(int idPunto) {
         contenedores = new ArrayList<>();
         this.idPunto = idPunto;
         nombreArchivo = idPunto + "_" + "contenedores.txt";
     }
 
-    public String getIdPunto() {
+    public int getIdPunto() {
         return idPunto;
     }
    
@@ -31,9 +31,9 @@ public class GestorContenedor {
         return contenedores;
     }
     
-    public  Contenedor buscarContenedorPorId(String id){
+    public  Contenedor buscarContenedorPorId(int id){
         for (Contenedor contenedor : contenedores) {
-            if(contenedor.getId().equals(id))
+            if(contenedor.getId() == id)
                 return contenedor;
         }
         return null;
@@ -48,7 +48,7 @@ public class GestorContenedor {
         return true;
     }
     
-    public boolean eliminarContenedorPorId(String id){
+    public boolean eliminarContenedorPorId(int id){
         Contenedor contenedor = buscarContenedorPorId(id);
         if(contenedor == null) return false;
         
@@ -56,7 +56,7 @@ public class GestorContenedor {
         return true;
     }
 
-    public boolean actualizarContenedorPorId(String id, Contenedor nuevosDatos){
+    public boolean actualizarContenedorPorId(int id, Contenedor nuevosDatos){
         Contenedor contenedor = buscarContenedorPorId(id);
         if(contenedor == null) return false;
         
@@ -103,7 +103,7 @@ public class GestorContenedor {
             String linea;
             while((linea = br.readLine()) != null) {
                 String partes[] = linea.split(";");
-                contenedores.add(new Contenedor(partes[0], partes[1], Integer.parseInt(partes[2]), Integer.parseInt(partes[3]), partes[4], partes[5]));
+                contenedores.add(new Contenedor(Integer.parseInt(partes[0]), partes[1], Integer.parseInt(partes[2]), Integer.parseInt(partes[3]), partes[4], partes[5]));
             }
             br.close();
         }
