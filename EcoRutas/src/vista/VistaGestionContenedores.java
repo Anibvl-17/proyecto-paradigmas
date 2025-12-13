@@ -69,7 +69,7 @@ public class VistaGestionContenedores extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo:");
 
-        comboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Papel y Cartón", "Plástico", "Vidrio", "Orgánico", " " }));
+        comboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Papel y Cartón", "Plástico", "Vidrio", "Orgánico" }));
 
         jLabel6.setText("Estado:");
 
