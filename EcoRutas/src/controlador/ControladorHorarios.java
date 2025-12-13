@@ -3,11 +3,11 @@ package controlador;
 import vista.*;
 import modelo.*;
 
-public class ControladorVerHorarios {
+public class ControladorHorarios {
     VistaHorarioRec vista;
     GestorHorarioRecoleccion modelo;
     
-    public ControladorVerHorarios(GestorHorarioRecoleccion modelo, VistaHorarioRec vista) {
+    public ControladorHorarios(GestorHorarioRecoleccion modelo, VistaHorarioRec vista) {
         this.vista = vista;
         this.modelo = modelo;
     }
