@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -98,6 +99,11 @@ public class GestorContenedor {
     // Guarda los contenedores, el archivo incluye el id del punto de reciclaje
     // para luego poder recuperar la lista de cada punto
     public void cargarArchivo() throws FileNotFoundException, IOException {
+        // Verifica si el archivo de contenedores existe
+        // Se agregó porque si el archivo de contenedores no existe, los puntos
+        // no se cargaban
+        if (!new File(nombreArchivo).exists()) return;
+        
         contenedores.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;
