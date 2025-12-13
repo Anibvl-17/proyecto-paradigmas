@@ -53,7 +53,7 @@ public class Contenedor {
     }
 
     public void setTipo(String tipo) {
-        if(!tipo.equalsIgnoreCase("Papel y carton") && !tipo.equalsIgnoreCase("Plastico") && !tipo.equalsIgnoreCase("Vidrio") && !tipo.equalsIgnoreCase("Organico")){
+        if(!tipo.equalsIgnoreCase("Papel y cartón") && !tipo.equalsIgnoreCase("Plástico") && !tipo.equalsIgnoreCase("Vidrio") && !tipo.equalsIgnoreCase("Orgánico")){
             throw new IllegalArgumentException("Error: Solo puede escoger tipo entre (Papel y carton, Plastico, Vidrio, Organico).");
         }
         this.tipo = tipo;
