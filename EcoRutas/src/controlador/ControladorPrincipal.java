@@ -1,5 +1,8 @@
 package controlador;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.swing.table.DefaultTableModel;
 import vista.*;
 import modelo.*;
 
@@ -7,9 +10,12 @@ public class ControladorPrincipal {
     private VistaPrincipal vistaPrincipal;
     private GestorPuntoReciclaje gestorPuntos;
     
+    private VistaMensajes vistaMensajes;
+    
     public ControladorPrincipal(GestorPuntoReciclaje gestorPuntos, VistaPrincipal vista) {
         this.vistaPrincipal = vista;
         this.gestorPuntos = gestorPuntos;
+        vistaMensajes = new VistaMensajes();
     }
     
     public void iniciar() {
@@ -23,6 +29,8 @@ public class ControladorPrincipal {
         vistaPrincipal.getBtnHorarios().addActionListener(e -> mostrarHorarios());
         
         vistaPrincipal.getBtnSolicitud().addActionListener(e -> mostrarVistaSolicitud());
+        
+        listarPuntos();
     }
     
     public void mostrarVistaSolicitud() {
@@ -43,5 +51,22 @@ public class ControladorPrincipal {
         VistaAccesoFuncionario vista = new VistaAccesoFuncionario();
         ControladorAcceso controlador = new ControladorAcceso(vista);
         controlador.iniciar();
+    }
+    
+    private void listarPuntos() {
+        try {
+            gestorPuntos.cargarArchivo();
+            
+            DefaultTableModel m = (DefaultTableModel) vistaPrincipal.getTablaPuntos().getModel();
+            m.setNumRows(0);
+            
+            for (PuntoReciclaje p : gestorPuntos.ListarPuntos()) {
+                m.addRow(new Object[] {p.getId(), p.getNombre(), p.getDireccion(), p.getSector(), p.isDisponible()} );
+            }
+        } catch (FileNotFoundException e) {
+            // Archivo no encontrado, significa que no se han guardado puntos
+        } catch (IOException e) {
+            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los puntos de reciclaje");
+        }
     }
 }
