@@ -4,8 +4,13 @@
  */
 package vista;
 
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -24,6 +29,62 @@ public class VistaGestionSolicitudes extends javax.swing.JFrame {
         initComponents();
     }
 
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public JButton getBtnEliminar() {
+        return btnEliminar;
+    }
+
+    public JCheckBox getCheckboxReclamos() {
+        return checkboxReclamos;
+    }
+
+    public JCheckBox getCheckboxSugerencias() {
+        return checkboxSugerencias;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JSeparator getjSeparator1() {
+        return jSeparator1;
+    }
+
+    public JTable getTablaSolicitudes() {
+        return tablaSolicitudes;
+    }
+
+    public JTextField getTxtId() {
+        return txtId;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

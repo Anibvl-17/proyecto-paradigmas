@@ -25,12 +25,14 @@ public class ControladorGestorHorarios {
                 
         vista.setVisible(true);
         
-        cargarHorarios();
-
         // Asignacion de funciones a botones
         vista.getBtnCrear().addActionListener(e -> agregarHorario());
+        vista.getBtnActualizar().addActionListener( e -> actualizarHorario());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         vista.getBtnEliminar().addActionListener(e -> eliminarHorario());
+
+        cargarHorario();
+
         vista.getBtnActualizar().addActionListener(e -> actualizarHorario());
     }
 
@@ -137,7 +139,11 @@ public class ControladorGestorHorarios {
             int id = Integer.parseInt(vista.getTxtId().getText().trim());
             
             if (id < 1) throw new NumberFormatException();
-            
+            modelo.eliminarHorarioPorId(id);
+            listarHorarios(); // Actualiza la lista automaticamente
+            archivarHorario();
+            vistaMensajes.mostrarInfo(null, "Horario eliminado exitosamente");
+
             return id;
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "Error: El ID debe ser un número positivo");
@@ -179,6 +185,25 @@ public class ControladorGestorHorarios {
             modelo.archivar();
         } catch (IOException e) {
             vistaMensajes.mostrarError(null, "Error: No se pudo guardar los horarios de recolección");
+        }
+    }
+    
+    private void archivarHorario() {
+        try {
+            modelo.archivar();
+        } catch (IOException ex) {
+            vistaMensajes.mostrarError(null, "Error: No se pudo guardar los Horarios");
+
+        }
+    }
+
+    private void cargarHorario() {
+        try {
+            modelo.cargarArchivo();
+            listarHorarios();
+        } catch (FileNotFoundException e) {
+        } catch (IOException ex) {
+            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los Horarios");
         }
     }
     
