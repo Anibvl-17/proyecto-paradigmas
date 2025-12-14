@@ -78,6 +78,7 @@ public class ControladorGestorHorarios {
             
             modelo.actualizarHorarioPorId(id, new HorarioRecoleccion(id, sector, diaSemana, horaInicio, horaFin, tipoResiduo));
             archivarHorarios();
+            listarHorarios();
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
         } catch (IllegalArgumentException e) {
