@@ -304,28 +304,7 @@ public class VistaGestionSolicitudes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new VistaGestionSolicitudes().setVisible(true));
     }
-
-    public JButton getBtnEliminar() {
-        return btnEliminar;
-    }
-
-    public JCheckBox getCheckboxReclamos() {
-        return checkboxReclamos;
-    }
-
-    public JCheckBox getCheckboxSugerencias() {
-        return checkboxSugerencias;
-    }
-
-    public JTable getTablaSolicitudes() {
-        return tablaSolicitudes;
-    }
-
-    public JTextField getTxtId() {
-        return txtId;
-    }
-    
-    
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;
