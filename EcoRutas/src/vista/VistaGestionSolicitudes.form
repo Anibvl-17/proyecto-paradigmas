@@ -161,6 +161,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkboxReclamos">
           <Properties>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Reclamos"/>
           </Properties>
           <Events>
@@ -169,6 +170,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkboxSugerencias">
           <Properties>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Sugerencias"/>
           </Properties>
         </Component>

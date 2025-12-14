@@ -4,6 +4,11 @@
  */
 package vista;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author anibal
@@ -69,6 +74,7 @@ public class VistaGestionSolicitudes extends javax.swing.JFrame {
 
         jLabel4.setText("Seleccione los tipos de solicitud que desea ver a continuación");
 
+        checkboxReclamos.setSelected(true);
         checkboxReclamos.setText("Reclamos");
         checkboxReclamos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +82,7 @@ public class VistaGestionSolicitudes extends javax.swing.JFrame {
             }
         });
 
+        checkboxSugerencias.setSelected(true);
         checkboxSugerencias.setText("Sugerencias");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -236,6 +243,28 @@ public class VistaGestionSolicitudes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new VistaGestionSolicitudes().setVisible(true));
     }
+
+    public JButton getBtnEliminar() {
+        return btnEliminar;
+    }
+
+    public JCheckBox getCheckboxReclamos() {
+        return checkboxReclamos;
+    }
+
+    public JCheckBox getCheckboxSugerencias() {
+        return checkboxSugerencias;
+    }
+
+    public JTable getTablaSolicitudes() {
+        return tablaSolicitudes;
+    }
+
+    public JTextField getTxtId() {
+        return txtId;
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;
