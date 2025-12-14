@@ -66,15 +66,10 @@ public class ControladorGestorHorarios {
     }
     
     private void limpiarFormulario() {
-        // Obtiene el primer item de los combo box
-        Object primerItemSector = vista.getComboBoxSector().getItemAt(0);
-        Object primerItemDia = vista.getComboBoxDia().getItemAt(0);
-        Object primerItemTipoResiduo = vista.getComboBoxTipoResiduo().getItemAt(0);
-        
         // Selecciona el primer item de los combo box
-        vista.getComboBoxSector().getModel().setSelectedItem(primerItemSector);
-        vista.getComboBoxDia().getModel().setSelectedItem(primerItemDia);
-        vista.getComboBoxTipoResiduo().getModel().setSelectedItem(primerItemTipoResiduo);
+        vista.getComboBoxSector().setSelectedIndex(0);
+        vista.getComboBoxDia().setSelectedIndex(0);
+        vista.getComboBoxTipoResiduo().setSelectedIndex(0);
         
         // Limpia el texto de los textfields
         vista.getTxtHoraInicio().setText("");
