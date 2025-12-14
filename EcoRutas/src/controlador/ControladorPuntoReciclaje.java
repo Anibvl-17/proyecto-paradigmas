@@ -31,8 +31,17 @@ public class ControladorPuntoReciclaje {
         vista.getBtnCrear().addActionListener(e -> agregarPunto());
         vista.getBtnActualizar().addActionListener(e -> actualizarPunto());
         vista.getBtnEliminar().addActionListener(e -> eliminarPunto());
+        vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         
         cargarPuntos();
+    }
+    
+    private void limpiarFormulario() {
+        vista.getComboBoxSector().setSelectedIndex(0);
+        vista.getTxtDireccion().setText("");
+        vista.getTxtNombre().setText("");
+        
+        vista.getTxtNombre().requestFocus();
     }
 
     private void mostrarGestionContenedores() {
