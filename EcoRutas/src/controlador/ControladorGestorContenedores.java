@@ -60,6 +60,7 @@ public class ControladorGestorContenedores {
             modelo.agregarContenedor(new Contenedor(id, tipo, capacidadMaxima, capacidadActual, estado, color));
             listarContenedores();
             archivarContenedores();
+            vistaMensajes.mostrarInfo(null, "Contenedor actualizado exitosamente");
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "Error: La capacidad máxima y actual deben ser números.");
         } catch (IllegalArgumentException e) {

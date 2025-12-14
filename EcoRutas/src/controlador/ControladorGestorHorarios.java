@@ -48,6 +48,7 @@ public class ControladorGestorHorarios {
             modelo.agregarHorario(h);
             listarHorarios();
             archivarHorarios();
+            vistaMensajes.mostrarInfo(null, "Horario agregado exitosamente");
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
         } catch (IllegalArgumentException e) {
@@ -79,6 +80,7 @@ public class ControladorGestorHorarios {
             modelo.actualizarHorarioPorId(id, new HorarioRecoleccion(id, sector, diaSemana, horaInicio, horaFin, tipoResiduo));
             archivarHorarios();
             listarHorarios();
+            vistaMensajes.mostrarInfo(null, "Horario actualizado exitosamente");
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
         } catch (IllegalArgumentException e) {

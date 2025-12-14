@@ -73,6 +73,7 @@ public class ControladorPuntoReciclaje {
             modelo.agregarPunto(new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
             listarPuntos();
             archivarPuntos();
+            vistaMensajes.mostrarInfo(null, "Punto de reciclaje agregado exitosamente");
         } catch (IllegalArgumentException e) {
             vistaMensajes.mostrarError(null, e.getMessage());
         }
