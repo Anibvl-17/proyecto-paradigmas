@@ -84,18 +84,26 @@ public class ControladorPuntoReciclaje {
         // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
         if (id < 1) return;
         
+        PuntoReciclaje puntoActual = modelo.buscarPuntoPorId(id);
+        
+        if (puntoActual == null) {
+            vistaMensajes.mostrarError(null, "Error: El punto con ID " + id + " no existe.");
+            return;
+        }
+        
         String nombre = vista.getTxtNombre().getText().trim();
         String direccion = vista.getTxtDireccion().getText().trim();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
         boolean disponible = true;
         GestorContenedor gestorContenedor = new GestorContenedor(id);
         
+        // Si los campos estan vacíos, se reemplaza por el dato ya existente
+        if (nombre.isBlank()) nombre = puntoActual.getNombre();
+        if (direccion.isBlank()) direccion = puntoActual.getDireccion();
+        
         try {
-            if (!modelo.actualizarPuntoPorId(id, new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor))) {
-                vistaMensajes.mostrarError(null, "Error: El punto con ID " + id + " no existe.");
-                return;
-            }
-
+            modelo.actualizarPuntoPorId(id, new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
+            
             vistaMensajes.mostrarInfo(null, "Punto con ID " + id + " actualizado exitosamente");
             listarPuntos();
             archivarPuntos();

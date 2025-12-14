@@ -243,7 +243,7 @@
             </Property>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Para actualizar un punto con el formulario, ingrese el ID y presione &#xa;Actualizar Punto&#xa;&#xa;Para eliminar un punto, ingrese el ID y presione Eliminar Punto&#xa;&#xa;Para gestionar los contenedores de un punto, ingrese el ID y&#xa;presione Gestionar Contenedores"/>
+            <Property name="text" type="java.lang.String" value="Para actualizar un punto con el formulario, ingrese el ID y presione &#xa;Actualizar Punto. Los campos vac&#xed;os no se actualizar&#xe1;n.&#xa;&#xa;Para eliminar un punto, ingrese el ID y presione Eliminar Punto&#xa;&#xa;Para gestionar los contenedores de un punto, ingrese el ID y&#xa;presione Gestionar Contenedores"/>
             <Property name="wrapStyleWord" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor Por defecto"/>
