@@ -54,12 +54,13 @@ public class ControladorGestorContenedores {
         String color = (String) vista.getComboBoxColor().getSelectedItem();
         
         try {
-            int capacidadMaxima = Integer.parseInt(vista.getTxtCapacidadMaxima().getText());
-            int capacidadActual = Integer.parseInt(vista.getTxtCapacidadActual().getText());
+            int capacidadMaxima = Integer.parseInt(vista.getTxtCapacidadMaxima().getText().trim());
+            int capacidadActual = Integer.parseInt(vista.getTxtCapacidadActual().getText().trim());
             
             modelo.agregarContenedor(new Contenedor(id, tipo, capacidadMaxima, capacidadActual, estado, color));
             listarContenedores();
             archivarContenedores();
+            vistaMensajes.mostrarInfo(null, "Contenedor actualizado exitosamente");
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "Error: La capacidad máxima y actual deben ser números.");
         } catch (IllegalArgumentException e) {
@@ -69,13 +70,17 @@ public class ControladorGestorContenedores {
 
     private void actualizarContenedor() {
         int id = obtenerId();
+        
+        // Si el id es -1, ya se mostró un mensaje de error y no continua con la operacion
+        if (id == -1) return;
+        
         String tipo = (String) vista.getComboBoxTipo().getSelectedItem();
         String estado = (String) vista.getComboBoxEstado().getSelectedItem();
         String color = (String) vista.getComboBoxColor().getSelectedItem();
         
         try {
-            int capacidadMaxima = Integer.parseInt(vista.getTxtCapacidadMaxima().getText());
-            int capacidadActual = Integer.parseInt(vista.getTxtCapacidadActual().getText());
+            int capacidadMaxima = Integer.parseInt(vista.getTxtCapacidadMaxima().getText().trim());
+            int capacidadActual = Integer.parseInt(vista.getTxtCapacidadActual().getText().trim());
             
             if (!modelo.actualizarContenedorPorId(id, new Contenedor(id, tipo, capacidadMaxima, capacidadActual, estado, color))) {
                 vistaMensajes.mostrarError(null, "Error: El contenedor con ID " + id + " no existe.");
@@ -97,6 +102,9 @@ public class ControladorGestorContenedores {
 
     private void eliminarContenedor() {
         int id = obtenerId();
+        
+        // Si el id es -1, ya se mostró un mensaje de error y no continua con la operacion
+        if (id == -1) return;
 
         if (!modelo.eliminarContenedorPorId(id)) {
             vistaMensajes.mostrarError(null, "Error: El contenedor con ID " + id + " no existe.");
@@ -132,10 +140,13 @@ public class ControladorGestorContenedores {
     // Se usa para evitar escribir varias veces el mismo codigo
     private int obtenerId() {
         try {
-            int id = Integer.parseInt(vista.getTxtId().getText());
+            int id = Integer.parseInt(vista.getTxtId().getText().trim());
+            
+            if (id < 1) throw new NumberFormatException();
+            
             return id;
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El id debe ser un número");
+            vistaMensajes.mostrarError(null, "Error: El id debe ser un número positivo");
             return -1;
         }
     }

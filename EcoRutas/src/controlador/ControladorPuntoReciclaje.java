@@ -64,8 +64,8 @@ public class ControladorPuntoReciclaje {
 
     private void agregarPunto() {
         int id = calcularId();
-        String nombre = vista.getTxtNombre().getText();
-        String direccion = vista.getTxtDireccion().getText();
+        String nombre = vista.getTxtNombre().getText().trim();
+        String direccion = vista.getTxtDireccion().getText().trim();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
         boolean disponible = true;
         GestorContenedor gestorContenedor = new GestorContenedor(id);
@@ -73,6 +73,7 @@ public class ControladorPuntoReciclaje {
             modelo.agregarPunto(new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
             listarPuntos();
             archivarPuntos();
+            vistaMensajes.mostrarInfo(null, "Punto de reciclaje agregado exitosamente");
         } catch (IllegalArgumentException e) {
             vistaMensajes.mostrarError(null, e.getMessage());
         }
@@ -84,18 +85,26 @@ public class ControladorPuntoReciclaje {
         // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
         if (id < 1) return;
         
-        String nombre = vista.getTxtNombre().getText();
-        String direccion = vista.getTxtDireccion().getText();
+        PuntoReciclaje puntoActual = modelo.buscarPuntoPorId(id);
+        
+        if (puntoActual == null) {
+            vistaMensajes.mostrarError(null, "Error: El punto con ID " + id + " no existe.");
+            return;
+        }
+        
+        String nombre = vista.getTxtNombre().getText().trim();
+        String direccion = vista.getTxtDireccion().getText().trim();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
         boolean disponible = true;
-        GestorContenedor gestorContenedor = new GestorContenedor(id);
+        GestorContenedor gestorContenedor = puntoActual.getContenedores();
+        
+        // Si los campos estan vacíos, se reemplaza por el dato ya existente
+        if (nombre.isBlank()) nombre = puntoActual.getNombre();
+        if (direccion.isBlank()) direccion = puntoActual.getDireccion();
         
         try {
-            if (!modelo.actualizarPuntoPorId(id, new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor))) {
-                vistaMensajes.mostrarError(null, "Error: El punto con ID " + id + " no existe.");
-                return;
-            }
-
+            modelo.actualizarPuntoPorId(id, new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
+            
             vistaMensajes.mostrarInfo(null, "Punto con ID " + id + " actualizado exitosamente");
             listarPuntos();
             archivarPuntos();
@@ -146,7 +155,7 @@ public class ControladorPuntoReciclaje {
     // Se usa para evitar escribir varias veces el mismo codigo
     private int obtenerId() {
         try {
-            int id = Integer.parseInt(vista.getTxtId().getText());
+            int id = Integer.parseInt(vista.getTxtId().getText().trim());
             
             if (id < 1) throw new NumberFormatException();
             

@@ -4,6 +4,10 @@
  */
 package vista;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+
 /**
  *
  * @author xo
@@ -33,7 +37,7 @@ public class VistaHorarioRec extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         comboBoxSector = new javax.swing.JComboBox<>();
         btnBuscar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnListarTodos = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHorarios = new javax.swing.JTable();
@@ -49,10 +53,10 @@ public class VistaHorarioRec extends javax.swing.JFrame {
 
         btnBuscar.setText("Buscar");
 
-        jButton1.setText("Listar todos los sectores");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnListarTodos.setText("Listar todos los sectores");
+        btnListarTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnListarTodosActionPerformed(evt);
             }
         });
 
@@ -68,7 +72,7 @@ public class VistaHorarioRec extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                .addComponent(btnListarTodos, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -79,7 +83,7 @@ public class VistaHorarioRec extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(comboBoxSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
-                    .addComponent(jButton1))
+                    .addComponent(btnListarTodos))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
@@ -157,9 +161,9 @@ public class VistaHorarioRec extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnListarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarTodosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnListarTodosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,15 +190,32 @@ public class VistaHorarioRec extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new VistaHorarioRec().setVisible(true));
     }
 
+    public JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public JButton getBtnListarTodos() {
+        return btnListarTodos;
+    }
+
+    public JComboBox<String> getComboBoxSector() {
+        return comboBoxSector;
+    }
+
+    public JTable getTablaHorarios() {
+        return tablaHorarios;
+    }
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnListarTodos;
     private javax.swing.JComboBox<String> comboBoxSector;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaHorarios;
     // End of variables declaration//GEN-END:variables

@@ -23,6 +23,8 @@ public class ControladorContenedor {
         
         listarContenedores();
         
+        vista.getLabelId().setText(String.valueOf(modelo.getIdPunto()));
+        
         vista.setVisible(true);
     }
     
