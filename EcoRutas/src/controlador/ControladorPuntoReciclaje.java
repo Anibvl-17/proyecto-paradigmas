@@ -71,6 +71,10 @@ public class ControladorPuntoReciclaje {
 
     private void actualizarPunto() {
         int id = obtenerId();
+        
+        // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
+        if (id < 1) return;
+        
         String nombre = vista.getTxtNombre().getText();
         String direccion = vista.getTxtDireccion().getText();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
@@ -90,7 +94,7 @@ public class ControladorPuntoReciclaje {
             vistaMensajes.mostrarError(null, e.getMessage());
         }
         
-        
+
     }
 
     private void eliminarPunto() {
@@ -98,7 +102,6 @@ public class ControladorPuntoReciclaje {
 
         if (!modelo.eliminarPuntoPorId(id)) {
             // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
-            // 
             if (id == -1) return;
             
             vistaMensajes.mostrarError(null, "Error: El punto con ID " + id + " no existe.");
