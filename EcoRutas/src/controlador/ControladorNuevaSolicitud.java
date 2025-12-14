@@ -43,11 +43,8 @@ public class ControladorNuevaSolicitud {
     }
     
     private void limpiarFormulario() {
-        // Obtiene el primer item del combo box
-        Object primerItem = vista.getComboBoxTipo().getItemAt(0);
-        
         // Selecciona el primer item de los combo box
-        vista.getComboBoxTipo().getModel().setSelectedItem(primerItem);
+        vista.getComboBoxTipo().setSelectedIndex(0);
         
         // Limpia el texto de los textfields
         vista.getTxtNombre().setText("");

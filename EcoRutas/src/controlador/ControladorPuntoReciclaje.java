@@ -31,8 +31,17 @@ public class ControladorPuntoReciclaje {
         vista.getBtnCrear().addActionListener(e -> agregarPunto());
         vista.getBtnActualizar().addActionListener(e -> actualizarPunto());
         vista.getBtnEliminar().addActionListener(e -> eliminarPunto());
+        vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         
         cargarPuntos();
+    }
+    
+    private void limpiarFormulario() {
+        vista.getComboBoxSector().setSelectedIndex(0);
+        vista.getTxtDireccion().setText("");
+        vista.getTxtNombre().setText("");
+        
+        vista.getTxtNombre().requestFocus();
     }
 
     private void mostrarGestionContenedores() {
@@ -71,6 +80,10 @@ public class ControladorPuntoReciclaje {
 
     private void actualizarPunto() {
         int id = obtenerId();
+        
+        // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
+        if (id < 1) return;
+        
         String nombre = vista.getTxtNombre().getText();
         String direccion = vista.getTxtDireccion().getText();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
@@ -90,13 +103,16 @@ public class ControladorPuntoReciclaje {
             vistaMensajes.mostrarError(null, e.getMessage());
         }
         
-        
+
     }
 
     private void eliminarPunto() {
         int id = obtenerId();
 
         if (!modelo.eliminarPuntoPorId(id)) {
+            // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
+            if (id == -1) return;
+            
             vistaMensajes.mostrarError(null, "Error: El punto con ID " + id + " no existe.");
             return;
         }
@@ -131,9 +147,12 @@ public class ControladorPuntoReciclaje {
     private int obtenerId() {
         try {
             int id = Integer.parseInt(vista.getTxtId().getText());
+            
+            if (id < 1) throw new NumberFormatException();
+            
             return id;
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El id debe ser un número");
+            vistaMensajes.mostrarError(null, "Error: El id debe ser un número positivo");
             return -1;
         }
     }
