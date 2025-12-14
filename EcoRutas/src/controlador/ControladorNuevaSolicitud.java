@@ -34,6 +34,7 @@ public class ControladorNuevaSolicitud {
         try {
             modelo.agregarSolicitud(new Solicitud(calcularId(), nombre, mensaje, tipoSolicitud));
             modelo.archivar();
+            limpiarFormulario();
             vistaMensajes.mostrarInfo(null, "Solicitud creada exitosamente");
         } catch (IllegalArgumentException e) {
             vistaMensajes.mostrarError(null, e.getMessage());
