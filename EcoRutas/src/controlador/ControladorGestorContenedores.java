@@ -69,6 +69,10 @@ public class ControladorGestorContenedores {
 
     private void actualizarContenedor() {
         int id = obtenerId();
+        
+        // Si el id es -1, ya se mostró un mensaje de error y no continua con la operacion
+        if (id == -1) return;
+        
         String tipo = (String) vista.getComboBoxTipo().getSelectedItem();
         String estado = (String) vista.getComboBoxEstado().getSelectedItem();
         String color = (String) vista.getComboBoxColor().getSelectedItem();
@@ -133,9 +137,12 @@ public class ControladorGestorContenedores {
     private int obtenerId() {
         try {
             int id = Integer.parseInt(vista.getTxtId().getText().trim());
+            
+            if (id < 1) throw new NumberFormatException();
+            
             return id;
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El id debe ser un número");
+            vistaMensajes.mostrarError(null, "Error: El id debe ser un número positivo");
             return -1;
         }
     }
