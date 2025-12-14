@@ -31,8 +31,20 @@ public class ControladorGestorContenedores {
         vista.getBtnAgregar().addActionListener(e -> agregarContenedor());
         vista.getBtnActualizar().addActionListener(e -> actualizarContenedor());
         vista.getBtnEliminar().addActionListener(e -> eliminarContenedor());
+        vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         
         cargarContenedores();
+    }
+    
+    private void limpiarFormulario() {
+        // Selecciona el primer item de los combo box
+        vista.getComboBoxTipo().setSelectedIndex(0);
+        vista.getComboBoxEstado().setSelectedIndex(0);
+        vista.getComboBoxColor().setSelectedIndex(0);
+        
+        // Limpia el texto de los textfields
+        vista.getTxtCapacidadMaxima().setText("");
+        vista.getTxtCapacidadActual().setText("");
     }
     
     private void agregarContenedor() {
