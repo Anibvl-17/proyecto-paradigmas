@@ -30,6 +30,7 @@ public class ControladorPrincipal {
         
         vistaPrincipal.getBtnSolicitud().addActionListener(e -> mostrarVistaSolicitud());
         vistaPrincipal.getBtnBuscarPunto().addActionListener(e -> mostrarContenedoresPorIdPunto());
+        vistaPrincipal.getBtnActualizar().addActionListener(e -> listarPuntos());
         
         listarPuntos();
     }
