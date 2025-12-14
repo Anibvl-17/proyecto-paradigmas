@@ -57,7 +57,7 @@ public class ControladorPrincipal {
     
     private void mostrarContenedoresPorIdPunto() {
         try {
-            int idPunto = Integer.parseInt(vistaPrincipal.getTxtIDPunto().getText());
+            int idPunto = Integer.parseInt(vistaPrincipal.getTxtIDPunto().getText().trim());
             
             if (idPunto < 1) {
                 throw new NumberFormatException();

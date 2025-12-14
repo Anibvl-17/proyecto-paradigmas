@@ -32,6 +32,7 @@ public class ControladorPuntoReciclaje {
         vista.getBtnActualizar().addActionListener(e -> actualizarPunto());
         vista.getBtnEliminar().addActionListener(e -> eliminarPunto());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
+        vista.getBtnGestionSolicitudes().addActionListener(e -> mostrarGestionSolicitudes());
         
         cargarPuntos();
     }
@@ -61,6 +62,14 @@ public class ControladorPuntoReciclaje {
         ControladorGestorContenedores controladorGestorContenedores = new ControladorGestorContenedores(modeloContenedor, vistaGestionContenedores);
         controladorGestorContenedores.iniciar();
     }
+    
+    private void mostrarGestionSolicitudes() {
+        GestorSolicitudes gestorSolicitudes = new GestorSolicitudes();
+        VistaGestionSolicitudes vistaGestionSolicitudes = new VistaGestionSolicitudes();
+        ControladorGestorSolicitudes controladorGestorSolicitudes = new ControladorGestorSolicitudes(gestorSolicitudes, vistaGestionSolicitudes);
+        
+        controladorGestorSolicitudes.iniciar();
+    }
 
     private void agregarPunto() {
         int id = calcularId();
@@ -73,6 +82,7 @@ public class ControladorPuntoReciclaje {
             modelo.agregarPunto(new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
             listarPuntos();
             archivarPuntos();
+            limpiarFormulario();
             vistaMensajes.mostrarInfo(null, "Punto de reciclaje agregado exitosamente");
         } catch (IllegalArgumentException e) {
             vistaMensajes.mostrarError(null, e.getMessage());
@@ -108,6 +118,7 @@ public class ControladorPuntoReciclaje {
             vistaMensajes.mostrarInfo(null, "Punto con ID " + id + " actualizado exitosamente");
             listarPuntos();
             archivarPuntos();
+            limpiarFormulario();
         } catch (IllegalArgumentException e) {
             vistaMensajes.mostrarError(null, e.getMessage());
         }
@@ -129,6 +140,7 @@ public class ControladorPuntoReciclaje {
         vistaMensajes.mostrarInfo(null, "El punto se eliminó exitosamente.");
         listarPuntos();
         archivarPuntos();
+        vista.getTxtId().setText("");
     }
 
     private void listarPuntos() {

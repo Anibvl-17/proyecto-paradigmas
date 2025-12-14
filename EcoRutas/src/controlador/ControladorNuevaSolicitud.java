@@ -32,8 +32,10 @@ public class ControladorNuevaSolicitud {
         String mensaje = vista.getTxtMensaje().getText();
         
         try {
+            modelo.cargarArchivo(); // Carga las solicitudes previas para no sobreescribirlas
             modelo.agregarSolicitud(new Solicitud(calcularId(), nombre, mensaje, tipoSolicitud));
             modelo.archivar();
+            limpiarFormulario();
             vistaMensajes.mostrarInfo(null, "Solicitud creada exitosamente");
         } catch (IllegalArgumentException e) {
             vistaMensajes.mostrarError(null, e.getMessage());
