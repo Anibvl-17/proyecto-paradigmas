@@ -48,6 +48,7 @@ public class ControladorGestorHorarios {
             modelo.agregarHorario(h);
             listarHorarios();
             archivarHorarios();
+            limpiarFormulario();
             vistaMensajes.mostrarInfo(null, "Horario agregado exitosamente");
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
@@ -80,6 +81,7 @@ public class ControladorGestorHorarios {
             modelo.actualizarHorarioPorId(id, new HorarioRecoleccion(id, sector, diaSemana, horaInicio, horaFin, tipoResiduo));
             archivarHorarios();
             listarHorarios();
+            limpiarFormulario();
             vistaMensajes.mostrarInfo(null, "Horario actualizado exitosamente");
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
@@ -113,6 +115,8 @@ public class ControladorGestorHorarios {
         // Limpia el texto de los textfields
         vista.getTxtHoraInicio().setText("");
         vista.getTxtHoraFin().setText("");
+        
+        vista.getTxtHoraInicio().requestFocus();
     }
 
     // Calcula la id de los horarios de acuerdo al ultimo horario de la lista.
@@ -155,6 +159,7 @@ public class ControladorGestorHorarios {
         modelo.eliminarHorarioPorId(id);
         listarHorarios(); // Actualiza la lista automaticamente
         archivarHorarios(); 
+        vista.getTxtId().setText("");
         vistaMensajes.mostrarInfo(null, "Horario eliminado exitosamente");
     }
     

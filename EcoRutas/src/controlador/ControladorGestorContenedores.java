@@ -45,6 +45,8 @@ public class ControladorGestorContenedores {
         // Limpia el texto de los textfields
         vista.getTxtCapacidadMaxima().setText("");
         vista.getTxtCapacidadActual().setText("");
+        
+        vista.getTxtCapacidadMaxima().requestFocus();
     }
     
     private void agregarContenedor() {
@@ -60,6 +62,7 @@ public class ControladorGestorContenedores {
             modelo.agregarContenedor(new Contenedor(id, tipo, capacidadMaxima, capacidadActual, estado, color));
             listarContenedores();
             archivarContenedores();
+            limpiarFormulario();
             vistaMensajes.mostrarInfo(null, "Contenedor actualizado exitosamente");
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "Error: La capacidad máxima y actual deben ser números.");
@@ -89,6 +92,7 @@ public class ControladorGestorContenedores {
             
             listarContenedores();
             archivarContenedores();
+            limpiarFormulario();
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "Error: La capacidad máxima y actual deben ser números.");
         } catch (IllegalArgumentException e) {
@@ -114,6 +118,7 @@ public class ControladorGestorContenedores {
         vistaMensajes.mostrarInfo(null, "El contenedor se eliminó exitosamente.");
         listarContenedores();
         archivarContenedores();
+        vista.getTxtId().setText("");
     }
 
     private void listarContenedores() {

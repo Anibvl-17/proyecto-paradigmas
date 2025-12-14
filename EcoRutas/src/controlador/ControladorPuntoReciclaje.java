@@ -73,6 +73,7 @@ public class ControladorPuntoReciclaje {
             modelo.agregarPunto(new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
             listarPuntos();
             archivarPuntos();
+            limpiarFormulario();
             vistaMensajes.mostrarInfo(null, "Punto de reciclaje agregado exitosamente");
         } catch (IllegalArgumentException e) {
             vistaMensajes.mostrarError(null, e.getMessage());
@@ -108,6 +109,7 @@ public class ControladorPuntoReciclaje {
             vistaMensajes.mostrarInfo(null, "Punto con ID " + id + " actualizado exitosamente");
             listarPuntos();
             archivarPuntos();
+            limpiarFormulario();
         } catch (IllegalArgumentException e) {
             vistaMensajes.mostrarError(null, e.getMessage());
         }
@@ -129,6 +131,7 @@ public class ControladorPuntoReciclaje {
         vistaMensajes.mostrarInfo(null, "El punto se eliminó exitosamente.");
         listarPuntos();
         archivarPuntos();
+        vista.getTxtId().setText("");
     }
 
     private void listarPuntos() {
