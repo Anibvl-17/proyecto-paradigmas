@@ -97,6 +97,10 @@ public class ControladorPuntoReciclaje {
         int id = obtenerId();
 
         if (!modelo.eliminarPuntoPorId(id)) {
+            // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
+            // 
+            if (id == -1) return;
+            
             vistaMensajes.mostrarError(null, "Error: El punto con ID " + id + " no existe.");
             return;
         }
@@ -131,9 +135,12 @@ public class ControladorPuntoReciclaje {
     private int obtenerId() {
         try {
             int id = Integer.parseInt(vista.getTxtId().getText());
+            
+            if (id < 1) throw new NumberFormatException();
+            
             return id;
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El id debe ser un número");
+            vistaMensajes.mostrarError(null, "Error: El id debe ser un número positivo");
             return -1;
         }
     }
