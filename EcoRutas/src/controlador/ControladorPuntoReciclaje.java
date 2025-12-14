@@ -32,6 +32,7 @@ public class ControladorPuntoReciclaje {
         vista.getBtnActualizar().addActionListener(e -> actualizarPunto());
         vista.getBtnEliminar().addActionListener(e -> eliminarPunto());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
+        vista.getBtnGestionSolicitudes().addActionListener(e -> mostrarGestionSolicitudes());
         
         cargarPuntos();
     }
@@ -60,6 +61,14 @@ public class ControladorPuntoReciclaje {
         VistaGestionContenedores vistaGestionContenedores = new VistaGestionContenedores();
         ControladorGestorContenedores controladorGestorContenedores = new ControladorGestorContenedores(modeloContenedor, vistaGestionContenedores);
         controladorGestorContenedores.iniciar();
+    }
+    
+    private void mostrarGestionSolicitudes() {
+        GestorSolicitudes gestorSolicitudes = new GestorSolicitudes();
+        VistaGestionSolicitudes vistaGestionSolicitudes = new VistaGestionSolicitudes();
+        ControladorGestorSolicitudes controladorGestorSolicitudes = new ControladorGestorSolicitudes(gestorSolicitudes, vistaGestionSolicitudes);
+        
+        controladorGestorSolicitudes.iniciar();
     }
 
     private void agregarPunto() {
