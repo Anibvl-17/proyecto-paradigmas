@@ -78,7 +78,7 @@ public class ControladorPrincipal {
             m.setNumRows(0);
             
             for (PuntoReciclaje p : gestorPuntos.ListarPuntos()) {
-                m.addRow(new Object[] {p.getId(), p.getNombre(), p.getDireccion(), p.getSector(), p.isDisponible()} );
+                m.addRow(new Object[] { p.getId(), p.getNombre(), p.getDireccion(), p.getSector() });
             }
         } catch (FileNotFoundException e) {
             // Archivo no encontrado, significa que no se han guardado puntos
