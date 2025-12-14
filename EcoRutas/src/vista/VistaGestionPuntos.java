@@ -100,7 +100,7 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
         jTextArea1.setBackground(java.awt.SystemColor.control);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Para actualizar un punto con el formulario, ingrese el ID y presione \nActualizar Punto\n\nPara eliminar un punto, ingrese el ID y presione Eliminar Punto\n\nPara gestionar los contenedores de un punto, ingrese el ID y\npresione Gestionar Contenedores");
+        jTextArea1.setText("Para actualizar un punto con el formulario, ingrese el ID y presione \nActualizar Punto. Los campos vacíos no se actualizarán.\n\nPara eliminar un punto, ingrese el ID y presione Eliminar Punto\n\nPara gestionar los contenedores de un punto, ingrese el ID y\npresione Gestionar Contenedores");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTextArea1.setFocusable(false);

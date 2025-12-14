@@ -70,6 +70,11 @@ public class Contenedor {
         if(capacidadActual < 0){
             throw new IllegalArgumentException("Error: Capacidad actual no puede contener números negativos.");
         }
+        
+        if (capacidadActual > capacidadMaxima) {
+            throw new IllegalArgumentException("Error: La capacidad actual no puede superar la capacidad máxima");
+        }
+        
         this.capacidadActual = capacidadActual;
     }
 

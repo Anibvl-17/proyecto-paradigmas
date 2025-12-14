@@ -22,16 +22,18 @@ public class ControladorGestorHorarios {
     public void iniciar() {
         vista.pack();
         vista.setLocationRelativeTo(null);
-        
+                
         vista.setVisible(true);
-
+        
         // Asignacion de funciones a botones
         vista.getBtnCrear().addActionListener(e -> agregarHorario());
         vista.getBtnActualizar().addActionListener( e -> actualizarHorario());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         vista.getBtnEliminar().addActionListener(e -> eliminarHorario());
-        
+
         cargarHorario();
+
+        vista.getBtnActualizar().addActionListener(e -> actualizarHorario());
     }
 
     private void agregarHorario() {
@@ -47,6 +49,42 @@ public class ControladorGestorHorarios {
 
             modelo.agregarHorario(h);
             listarHorarios();
+            archivarHorarios();
+            limpiarFormulario();
+            vistaMensajes.mostrarInfo(null, "Horario agregado exitosamente");
+        } catch (NumberFormatException e) {
+            vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
+        } catch (IllegalArgumentException e) {
+            vistaMensajes.mostrarError(null, e.getMessage());
+        }
+    }
+    
+    private void actualizarHorario() {
+        int id = obtenerId();
+        
+        // Si el id es -1, ya se mostró un mensaje de error y no continua con la operacion
+        if (id == -1) return;
+        
+        HorarioRecoleccion horarioActual = modelo.buscarPorId(id);
+        
+        if (horarioActual == null) {
+            vistaMensajes.mostrarError(null, "Error: El horario con ID " + id + " no existe");
+            return;
+        }
+        
+        String sector = (String) vista.getComboBoxSector().getSelectedItem();
+        String diaSemana = (String) vista.getComboBoxDia().getSelectedItem();
+        String tipoResiduo = (String) vista.getComboBoxTipoResiduo().getSelectedItem();
+        
+        try {
+            int horaInicio = Integer.parseInt(vista.getTxtHoraInicio().getText().trim());
+            int horaFin = Integer.parseInt(vista.getTxtHoraFin().getText().trim());
+            
+            modelo.actualizarHorarioPorId(id, new HorarioRecoleccion(id, sector, diaSemana, horaInicio, horaFin, tipoResiduo));
+            archivarHorarios();
+            listarHorarios();
+            limpiarFormulario();
+            vistaMensajes.mostrarInfo(null, "Horario actualizado exitosamente");
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
         } catch (IllegalArgumentException e) {
@@ -79,6 +117,8 @@ public class ControladorGestorHorarios {
         // Limpia el texto de los textfields
         vista.getTxtHoraInicio().setText("");
         vista.getTxtHoraFin().setText("");
+        
+        vista.getTxtHoraInicio().requestFocus();
     }
 
     // Calcula la id de los horarios de acuerdo al ultimo horario de la lista.
@@ -92,23 +132,59 @@ public class ControladorGestorHorarios {
         return modelo.listarHorarios().get(cantidadHorarios - 1).getId() + 1;
     }
     
-    private void eliminarHorario() {
+    // Obtiene el id del text field txtId
+    // Se usa para evitar escribir varias veces el mismo codigo
+    private int obtenerId() {
         try {
-            int id = Integer.parseInt(vista.getTxtId().getText());
+            int id = Integer.parseInt(vista.getTxtId().getText().trim());
             
-            if (!modelo.eliminarHorarioPorId(id)) {
-                vistaMensajes.mostrarError(null, "No existen horarios con id " + id);
-                return;
-            }
-            
+            if (id < 1) throw new NumberFormatException();
             modelo.eliminarHorarioPorId(id);
             listarHorarios(); // Actualiza la lista automaticamente
             archivarHorario();
             vistaMensajes.mostrarInfo(null, "Horario eliminado exitosamente");
+
+            return id;
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El ID debe ser un número");
-        } catch (IllegalArgumentException e) {
-            vistaMensajes.mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(null, "Error: El ID debe ser un número positivo");
+            return -1;
+        }
+    }
+    
+    private void eliminarHorario() {
+        int id = obtenerId();
+        
+        // Si el id es -1, ya se mostró un mensaje de error y no continua con la operacion
+        if (id == -1) return;
+        
+        if (!modelo.eliminarHorarioPorId(id)) {
+            vistaMensajes.mostrarError(null, "No existen horarios con id " + id);
+            return;
+        }
+
+        modelo.eliminarHorarioPorId(id);
+        listarHorarios(); // Actualiza la lista automaticamente
+        archivarHorarios(); 
+        vista.getTxtId().setText("");
+        vistaMensajes.mostrarInfo(null, "Horario eliminado exitosamente");
+    }
+    
+    private void cargarHorarios() {
+        try {
+            modelo.cargarArchivo();
+            listarHorarios();
+        } catch (FileNotFoundException e) {
+            // No se ha creado el archivo, por lo tanto no hay horarios
+        } catch (IOException e) {
+            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los horarios de recolección");
+        }
+    }
+    
+    private void archivarHorarios() {
+        try {
+            modelo.archivar();
+        } catch (IOException e) {
+            vistaMensajes.mostrarError(null, "Error: No se pudo guardar los horarios de recolección");
         }
     }
     
@@ -131,12 +207,6 @@ public class ControladorGestorHorarios {
         }
     }
     
-    private void actualizarHorario() {
-       //Terminar
-    }
-    
     // Pendientes:
-    // - Editar
     // - Filtrar
-    // - Actualizar incompleto
 }
