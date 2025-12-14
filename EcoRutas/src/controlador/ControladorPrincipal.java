@@ -29,6 +29,7 @@ public class ControladorPrincipal {
         vistaPrincipal.getBtnHorarios().addActionListener(e -> mostrarHorarios());
         
         vistaPrincipal.getBtnSolicitud().addActionListener(e -> mostrarVistaSolicitud());
+        vistaPrincipal.getBtnBuscarPunto().addActionListener(e -> mostrarContenedoresPorIdPunto());
         
         listarPuntos();
     }
@@ -43,7 +44,7 @@ public class ControladorPrincipal {
     private void mostrarHorarios() {
         VistaHorarioRec vista = new VistaHorarioRec();
         GestorHorarioRecoleccion modelo = new GestorHorarioRecoleccion();
-        ControladorVerHorarios controlador = new ControladorVerHorarios(modelo, vista);
+        ControladorHorarios controlador = new ControladorHorarios(modelo, vista);
         controlador.iniciar();
     }
     
@@ -51,6 +52,21 @@ public class ControladorPrincipal {
         VistaAccesoFuncionario vista = new VistaAccesoFuncionario();
         ControladorAcceso controlador = new ControladorAcceso(vista);
         controlador.iniciar();
+    }
+    
+    private void mostrarContenedoresPorIdPunto() {
+        try {
+            int idPunto = Integer.parseInt(vistaPrincipal.getTxtIDPunto().getText());
+            
+            GestorContenedor gestorContenedor = new GestorContenedor(idPunto);
+            VistaContenedores vistaContenedores = new VistaContenedores();
+            ControladorContenedor controladorContenedor = new ControladorContenedor(gestorContenedor, vistaContenedores);
+            
+            controladorContenedor.iniciar();
+            
+        } catch (NumberFormatException e) {
+            vistaMensajes.mostrarError(null, "Error: El ID del punto de reciclaje debe ser un número.");
+        }
     }
     
     private void listarPuntos() {
