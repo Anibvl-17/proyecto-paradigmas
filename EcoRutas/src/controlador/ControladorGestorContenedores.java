@@ -101,6 +101,9 @@ public class ControladorGestorContenedores {
 
     private void eliminarContenedor() {
         int id = obtenerId();
+        
+        // Si el id es -1, ya se mostró un mensaje de error y no continua con la operacion
+        if (id == -1) return;
 
         if (!modelo.eliminarContenedorPorId(id)) {
             vistaMensajes.mostrarError(null, "Error: El contenedor con ID " + id + " no existe.");
