@@ -1,5 +1,7 @@
 package controlador;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 import vista.*;
 import modelo.*;
@@ -25,8 +27,11 @@ public class ControladorGestorHorarios {
 
         // Asignacion de funciones a botones
         vista.getBtnCrear().addActionListener(e -> agregarHorario());
+        vista.getBtnActualizar().addActionListener( e -> actualizarHorario());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         vista.getBtnEliminar().addActionListener(e -> eliminarHorario());
+        
+        cargarHorario();
     }
 
     private void agregarHorario() {
@@ -98,6 +103,7 @@ public class ControladorGestorHorarios {
             
             modelo.eliminarHorarioPorId(id);
             listarHorarios(); // Actualiza la lista automaticamente
+            archivarHorario();
             vistaMensajes.mostrarInfo(null, "Horario eliminado exitosamente");
         } catch (NumberFormatException e) {
             vistaMensajes.mostrarError(null, "Error: El ID debe ser un número");
@@ -106,9 +112,31 @@ public class ControladorGestorHorarios {
         }
     }
     
+    private void archivarHorario() {
+        try {
+            modelo.archivar();
+        } catch (IOException ex) {
+            vistaMensajes.mostrarError(null, "Error: No se pudo guardar los Horarios");
+
+        }
+    }
+
+    private void cargarHorario() {
+        try {
+            modelo.cargarArchivo();
+            listarHorarios();
+        } catch (FileNotFoundException e) {
+        } catch (IOException ex) {
+            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los Horarios");
+        }
+    }
+    
+    private void actualizarHorario() {
+       //Terminar
+    }
+    
     // Pendientes:
     // - Editar
     // - Filtrar
-    // - Cargar desde archivo
-    // - Guardar desde archivo
+    // - Actualizar incompleto
 }
