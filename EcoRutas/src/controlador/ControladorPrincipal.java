@@ -59,14 +59,23 @@ public class ControladorPrincipal {
         try {
             int idPunto = Integer.parseInt(vistaPrincipal.getTxtIDPunto().getText());
             
-            GestorContenedor gestorContenedor = new GestorContenedor(idPunto);
+            if (idPunto < 1) {
+                throw new NumberFormatException();
+            }
+            
+            if (gestorPuntos.buscarPuntoPorId(idPunto) == null) {
+                vistaMensajes.mostrarError(null, "Error: El punto con ID " + idPunto + " no existe");
+                return;
+            }
+            
+            GestorContenedor gestorContenedor = new GestorContenedor(idPunto);            
             VistaContenedores vistaContenedores = new VistaContenedores();
             ControladorContenedor controladorContenedor = new ControladorContenedor(gestorContenedor, vistaContenedores);
             
             controladorContenedor.iniciar();
             
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El ID del punto de reciclaje debe ser un número.");
+            vistaMensajes.mostrarError(null, "Error: El ID del punto de reciclaje debe ser un número positivo.");
         }
     }
     
