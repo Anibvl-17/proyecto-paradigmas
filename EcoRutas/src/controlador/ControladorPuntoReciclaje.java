@@ -95,7 +95,7 @@ public class ControladorPuntoReciclaje {
         String direccion = vista.getTxtDireccion().getText().trim();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
         boolean disponible = true;
-        GestorContenedor gestorContenedor = new GestorContenedor(id);
+        GestorContenedor gestorContenedor = puntoActual.getContenedores();
         
         // Si los campos estan vacíos, se reemplaza por el dato ya existente
         if (nombre.isBlank()) nombre = puntoActual.getNombre();
