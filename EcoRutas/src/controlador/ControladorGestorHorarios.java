@@ -235,7 +235,4 @@ public class ControladorGestorHorarios {
             vistaMensajes.mostrarError("Error: No se pudo guardar los horarios de recolección");
         }
     }
-
-    // Pendientes:
-    // - Filtrar
 }
