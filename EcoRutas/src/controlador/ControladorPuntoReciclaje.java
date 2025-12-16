@@ -8,10 +8,10 @@ import vista.*;
 
 public class ControladorPuntoReciclaje {
 
-    VistaGestionPuntos vista;
-    GestorPuntoReciclaje modelo;
+    private VistaGestionPuntos vista;
+    private GestorPuntoReciclaje modelo;
 
-    VistaMensajes vistaMensajes;
+    private VistaMensajes vistaMensajes;
 
     public ControladorPuntoReciclaje(GestorPuntoReciclaje modelo, VistaGestionPuntos vista) {
         this.vista = vista;
