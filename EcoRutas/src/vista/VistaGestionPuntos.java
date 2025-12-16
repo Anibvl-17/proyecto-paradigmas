@@ -5,6 +5,7 @@
 package vista;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -56,6 +57,11 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        cbRural = new javax.swing.JCheckBox();
+        cbUrbano = new javax.swing.JCheckBox();
+        cbIndustrial = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -232,20 +238,55 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
+        jLabel7.setText("Seleccione los sectores que desea ver:");
+
+        cbRural.setSelected(true);
+        cbRural.setText("Rural");
+
+        cbUrbano.setSelected(true);
+        cbUrbano.setText("Urbano");
+
+        cbIndustrial.setSelected(true);
+        cbIndustrial.setText("Industrial");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Listado de Puntos");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(cbRural)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbUrbano)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbIndustrial))
+                            .addComponent(jLabel8))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbRural)
+                    .addComponent(cbUrbano)
+                    .addComponent(cbIndustrial))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -353,6 +394,18 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
     public JTextField getTxtNombre() {
         return txtNombre;
     }
+
+    public JCheckBox getCbIndustrial() {
+        return cbIndustrial;
+    }
+
+    public JCheckBox getCbRural() {
+        return cbRural;
+    }
+
+    public JCheckBox getCbUrbano() {
+        return cbUrbano;
+    }
     
     
 
@@ -363,6 +416,9 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
     private javax.swing.JButton btnGestionContenedores;
     private javax.swing.JButton btnGestionSolicitudes;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JCheckBox cbIndustrial;
+    private javax.swing.JCheckBox cbRural;
+    private javax.swing.JCheckBox cbUrbano;
     private javax.swing.JComboBox<String> comboBoxSector;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -370,6 +426,8 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
