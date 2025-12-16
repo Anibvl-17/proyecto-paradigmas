@@ -79,7 +79,7 @@ public class ControladorHorarios {
         
         for (HorarioRecoleccion h : modelo.listarHorarios()) {
             // Filtra los tipos de recoleccion segun los filtros seleccionados
-            if (!mostrarTipoGeneral && h.getTipoResiduo().equalsIgnoreCase("urbano")) continue;
+            if (!mostrarTipoGeneral && h.getTipoResiduo().equalsIgnoreCase("general")) continue;
             if (!mostrarTipoOrganico && h.getTipoResiduo().equalsIgnoreCase("orgánico")) continue;
             
             // Filtra los sectores de acuerdo a los filtros seleccionados de sector
