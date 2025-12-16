@@ -67,32 +67,42 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gestión de Puntos de Reciclaje", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel1.setText("Administre los puntos de reciclaje en la comuna");
 
+        btnGestionContenedores.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnGestionContenedores.setText("Gestionar Contenedores");
 
+        btnGestionSolicitudes.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnGestionSolicitudes.setText("Gestionar Solicitudes");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel2.setText("Nombre:");
 
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel3.setText("Dirección:");
 
+        txtDireccion.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDireccionActionPerformed(evt);
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel4.setText("Sector:");
 
+        comboBoxSector.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         comboBoxSector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Urbano", "Rural", "Industrial" }));
 
+        btnCrear.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnCrear.setText("Crear Punto");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,11 +110,13 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
             }
         });
 
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
 
         jTextArea1.setEditable(false);
         jTextArea1.setBackground(java.awt.SystemColor.control);
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jTextArea1.setRows(5);
         jTextArea1.setText("Para actualizar un punto con el formulario, ingrese el ID y presione \nActualizar Punto. Los campos vacíos no se actualizarán.\n\nPara eliminar un punto, ingrese el ID y presione Eliminar Punto\n\nPara gestionar los contenedores de un punto, ingrese el ID y\npresione Gestionar Contenedores");
         jTextArea1.setWrapStyleWord(true);
@@ -112,12 +124,18 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
         jTextArea1.setFocusable(false);
         jTextArea1.setRequestFocusEnabled(false);
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel6.setText("ID:");
 
+        txtId.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnActualizar.setText("Actualizar Punto");
 
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar Punto");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel5.setText("Gestione las solicitudes de la comunidad aquí:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -210,6 +228,7 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Puntos de Reciclaje", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
+        tabla.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -238,14 +257,18 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel7.setText("Seleccione los sectores que desea ver:");
 
+        cbRural.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cbRural.setSelected(true);
         cbRural.setText("Rural");
 
+        cbUrbano.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cbUrbano.setSelected(true);
         cbUrbano.setText("Urbano");
 
+        cbIndustrial.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cbIndustrial.setSelected(true);
         cbIndustrial.setText("Industrial");
 
@@ -259,7 +282,7 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
