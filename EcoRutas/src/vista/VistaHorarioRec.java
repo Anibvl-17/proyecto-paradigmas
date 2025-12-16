@@ -6,6 +6,7 @@ package vista;
 
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -39,10 +40,14 @@ public class VistaHorarioRec extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        cbTipoOrganico = new javax.swing.JCheckBox();
+        cbTipoGeneral = new javax.swing.JCheckBox();
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        comboBoxSector = new javax.swing.JComboBox<>();
-        btnBuscar = new javax.swing.JButton();
-        btnListarTodos = new javax.swing.JButton();
+        cbSectorUrbano = new javax.swing.JCheckBox();
+        cbSectorRural = new javax.swing.JCheckBox();
+        cbSectorIndustrial = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaHorarios = new javax.swing.JTable();
@@ -51,19 +56,26 @@ public class VistaHorarioRec extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Horarios de Recolección", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Busque por sector:");
+        jLabel1.setText("Seleccione los tipos de recolección que desea ver:");
 
-        comboBoxSector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Urbano", "Rural", "Industrial" }));
+        cbTipoOrganico.setSelected(true);
+        cbTipoOrganico.setText("Orgánico");
 
-        btnBuscar.setText("Buscar");
+        cbTipoGeneral.setSelected(true);
+        cbTipoGeneral.setText("General");
 
-        btnListarTodos.setText("Listar todos los sectores");
-        btnListarTodos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarTodosActionPerformed(evt);
-            }
-        });
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jLabel2.setText("Seleccione los sectores que desea ver:");
+
+        cbSectorUrbano.setSelected(true);
+        cbSectorUrbano.setText("Urbano");
+
+        cbSectorRural.setSelected(true);
+        cbSectorRural.setText("Rural");
+
+        cbSectorIndustrial.setSelected(true);
+        cbSectorIndustrial.setText("Industrial");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -71,25 +83,44 @@ public class VistaHorarioRec extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(cbTipoOrganico)
+                    .addComponent(cbTipoGeneral))
+                .addGap(71, 71, 71)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboBoxSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnListarTodos, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(cbSectorUrbano)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbSectorIndustrial))
+                    .addComponent(cbSectorRural))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(comboBoxSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar)
-                    .addComponent(btnListarTodos))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbTipoOrganico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbTipoGeneral)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbSectorUrbano)
+                            .addComponent(cbSectorIndustrial))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbSectorRural)
+                        .addGap(0, 10, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Horarios", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
@@ -114,7 +145,7 @@ public class VistaHorarioRec extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -166,10 +197,6 @@ public class VistaHorarioRec extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnListarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarTodosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnListarTodosActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -195,33 +222,47 @@ public class VistaHorarioRec extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new VistaHorarioRec().setVisible(true));
     }
 
-    public JButton getBtnBuscar() {
-        return btnBuscar;
+    public JCheckBox getCbSectorIndustrial() {
+        return cbSectorIndustrial;
     }
 
-    public JButton getBtnListarTodos() {
-        return btnListarTodos;
+    public JCheckBox getCbSectorRural() {
+        return cbSectorRural;
     }
 
-    public JComboBox<String> getComboBoxSector() {
-        return comboBoxSector;
+    public JCheckBox getCbSectorUrbano() {
+        return cbSectorUrbano;
+    }
+
+    public JCheckBox getCbTipoGeneral() {
+        return cbTipoGeneral;
+    }
+
+    public JCheckBox getCbTipoOrganico() {
+        return cbTipoOrganico;
     }
 
     public JTable getTablaHorarios() {
         return tablaHorarios;
     }
+
+    
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnListarTodos;
-    private javax.swing.JComboBox<String> comboBoxSector;
+    private javax.swing.JCheckBox cbSectorIndustrial;
+    private javax.swing.JCheckBox cbSectorRural;
+    private javax.swing.JCheckBox cbSectorUrbano;
+    private javax.swing.JCheckBox cbTipoGeneral;
+    private javax.swing.JCheckBox cbTipoOrganico;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tablaHorarios;
     // End of variables declaration//GEN-END:variables
 }
