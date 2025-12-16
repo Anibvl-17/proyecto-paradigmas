@@ -54,15 +54,15 @@ public class ControladorGestorSolicitudes {
             if (id < 1) throw new NumberFormatException();
             
             if (!modelo.eliminarSolicitudPorId(id)) {
-                vistaMensajes.mostrarError(null, "Error: La solicitud con ID " + id + " no existe");
+                vistaMensajes.mostrarError("Error: La solicitud con ID " + id + " no existe");
             }
             
             archivarSolicitudes();
             listarSolicitudes();
             vista.getTxtId().setText("");
-            vistaMensajes.mostrarInfo(null, "Solicitud eliminada exitosamente");
+            vistaMensajes.mostrarInfo("Solicitud eliminada exitosamente");
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El ID debe ser un número positivo");
+            vistaMensajes.mostrarError("Error: El ID debe ser un número positivo");
         }
     }
     
@@ -86,7 +86,7 @@ public class ControladorGestorSolicitudes {
         } catch (FileNotFoundException e) {
             // No se han guardado solicitudes, no hay nada que cargar
         } catch (IOException e) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo cargar las solicitudes");
+            vistaMensajes.mostrarError("Error: No se pudo cargar las solicitudes");
         }
     }
     
@@ -94,7 +94,7 @@ public class ControladorGestorSolicitudes {
         try {
             modelo.archivar();
         } catch (IOException e) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo guardar las solicitudes");
+            vistaMensajes.mostrarError("Error: No se pudo guardar las solicitudes");
         }
     }
 }

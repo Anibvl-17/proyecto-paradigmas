@@ -40,7 +40,7 @@ public class ControladorContenedor {
             }
             
         } catch (IOException e) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los contenedores");
+            vistaMensajes.mostrarError("Error: No se pudo cargar los contenedores");
         }
     }
     

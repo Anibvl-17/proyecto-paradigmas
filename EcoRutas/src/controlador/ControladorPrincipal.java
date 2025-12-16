@@ -64,7 +64,7 @@ public class ControladorPrincipal {
             }
             
             if (gestorPuntos.buscarPuntoPorId(idPunto) == null) {
-                vistaMensajes.mostrarError(null, "Error: El punto con ID " + idPunto + " no existe");
+                vistaMensajes.mostrarError("Error: El punto con ID " + idPunto + " no existe");
                 return;
             }
             
@@ -75,7 +75,7 @@ public class ControladorPrincipal {
             controladorContenedor.iniciar();
             
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El ID del punto de reciclaje debe ser un número positivo.");
+            vistaMensajes.mostrarError("Error: El ID del punto de reciclaje debe ser un número positivo.");
         }
     }
     
@@ -92,7 +92,7 @@ public class ControladorPrincipal {
         } catch (FileNotFoundException e) {
             // Archivo no encontrado, significa que no se han guardado puntos
         } catch (IOException e) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los puntos de reciclaje");
+            vistaMensajes.mostrarError("Error: No se pudo cargar los puntos de reciclaje");
         }
     }
 }

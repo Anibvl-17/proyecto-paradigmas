@@ -99,7 +99,7 @@ public class ControladorHorarios {
         } catch (FileNotFoundException e) {
             // No hay horarios guardados
         } catch (IOException e) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los horarios");
+            vistaMensajes.mostrarError("Error: No se pudo cargar los horarios");
         }
     }
 }

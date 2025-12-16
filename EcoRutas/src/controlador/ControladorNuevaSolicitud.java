@@ -36,11 +36,11 @@ public class ControladorNuevaSolicitud {
             modelo.agregarSolicitud(new Solicitud(calcularId(), nombre, mensaje, tipoSolicitud));
             modelo.archivar();
             limpiarFormulario();
-            vistaMensajes.mostrarInfo(null, "Solicitud creada exitosamente");
+            vistaMensajes.mostrarInfo("Solicitud creada exitosamente");
         } catch (IllegalArgumentException e) {
-            vistaMensajes.mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(e.getMessage());
         } catch (IOException ex) {
-            vistaMensajes.mostrarError(null, "Error al guardar solicitud.");
+            vistaMensajes.mostrarError("Error al guardar solicitud.");
         } 
     }
     

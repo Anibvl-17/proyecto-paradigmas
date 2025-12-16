@@ -49,11 +49,11 @@ public class ControladorGestorHorarios {
             listarHorarios();
             archivarHorarios();
             limpiarFormulario();
-            vistaMensajes.mostrarInfo(null, "Horario agregado exitosamente");
+            vistaMensajes.mostrarInfo("Horario agregado exitosamente");
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
+            vistaMensajes.mostrarError("La hora de inicio y hora de fin deben ser números");
         } catch (IllegalArgumentException e) {
-            vistaMensajes.mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(e.getMessage());
         }
     }
     
@@ -66,7 +66,7 @@ public class ControladorGestorHorarios {
         HorarioRecoleccion horarioActual = modelo.buscarPorId(id);
         
         if (horarioActual == null) {
-            vistaMensajes.mostrarError(null, "Error: El horario con ID " + id + " no existe");
+            vistaMensajes.mostrarError("Error: El horario con ID " + id + " no existe");
             return;
         }
         
@@ -82,11 +82,11 @@ public class ControladorGestorHorarios {
             archivarHorarios();
             listarHorarios();
             limpiarFormulario();
-            vistaMensajes.mostrarInfo(null, "Horario actualizado exitosamente");
+            vistaMensajes.mostrarInfo("Horario actualizado exitosamente");
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
+            vistaMensajes.mostrarError("La hora de inicio y hora de fin deben ser números");
         } catch (IllegalArgumentException e) {
-            vistaMensajes.mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(e.getMessage());
         }
     }
 
@@ -140,7 +140,7 @@ public class ControladorGestorHorarios {
 
             return id;
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El ID debe ser un número positivo");
+            vistaMensajes.mostrarError("Error: El ID debe ser un número positivo");
             return -1;
         }
     }
@@ -152,14 +152,14 @@ public class ControladorGestorHorarios {
         if (id == -1) return;
         
         if (!modelo.eliminarHorarioPorId(id)) {
-            vistaMensajes.mostrarError(null, "No existen horarios con id " + id);
+            vistaMensajes.mostrarError("No existen horarios con id " + id);
             return;
         }
 
         listarHorarios(); // Actualiza la lista automaticamente
         archivarHorarios(); 
         vista.getTxtId().setText("");
-        vistaMensajes.mostrarInfo(null, "Horario eliminado exitosamente");
+        vistaMensajes.mostrarInfo("Horario eliminado exitosamente");
     }
     
     private void cargarHorarios() {
@@ -169,7 +169,7 @@ public class ControladorGestorHorarios {
         } catch (FileNotFoundException e) {
             // No se ha creado el archivo, por lo tanto no hay horarios
         } catch (IOException e) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los horarios de recolección");
+            vistaMensajes.mostrarError("Error: No se pudo cargar los horarios de recolección");
         }
     }
     
@@ -177,7 +177,7 @@ public class ControladorGestorHorarios {
         try {
             modelo.archivar();
         } catch (IOException e) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo guardar los horarios de recolección");
+            vistaMensajes.mostrarError("Error: No se pudo guardar los horarios de recolección");
         }
     }
     
@@ -185,7 +185,7 @@ public class ControladorGestorHorarios {
         try {
             modelo.archivar();
         } catch (IOException ex) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo guardar los Horarios");
+            vistaMensajes.mostrarError("Error: No se pudo guardar los Horarios");
 
         }
     }

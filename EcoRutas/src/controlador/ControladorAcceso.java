@@ -38,7 +38,7 @@ public class ControladorAcceso {
             vista.setVisible(false);
             mostrarVistaEncargado();
         } else {
-            new VistaMensajes().mostrarError(null, "Contraseña incorrecta");
+            new VistaMensajes().mostrarError("Contraseña incorrecta");
         }
     }
 
