@@ -12,11 +12,19 @@ public class ControladorPuntoReciclaje {
     private GestorPuntoReciclaje modelo;
 
     private VistaMensajes vistaMensajes;
+    
+    private boolean mostrarRural;
+    private boolean mostrarUrbano;
+    private boolean mostrarIndustrial;
 
     public ControladorPuntoReciclaje(GestorPuntoReciclaje modelo, VistaGestionPuntos vista) {
         this.vista = vista;
         this.modelo = modelo;
         vistaMensajes = new VistaMensajes();
+        
+        mostrarRural = true;
+        mostrarUrbano = true;
+        mostrarIndustrial = true;
     }
 
     public void iniciar() {
@@ -33,6 +41,11 @@ public class ControladorPuntoReciclaje {
         vista.getBtnEliminar().addActionListener(e -> eliminarPunto());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         vista.getBtnGestionSolicitudes().addActionListener(e -> mostrarGestionSolicitudes());
+        
+        // Filtros de sector
+        vista.getCbRural().addActionListener(e -> alternarRural());
+        vista.getCbUrbano().addActionListener(e -> alternarUrbano());
+        vista.getCbIndustrial().addActionListener(e -> alternarIndustrial());
         
         cargarPuntos();
     }
@@ -123,7 +136,6 @@ public class ControladorPuntoReciclaje {
             vistaMensajes.mostrarError(e.getMessage());
         }
         
-
     }
 
     private void eliminarPunto() {
@@ -142,12 +154,31 @@ public class ControladorPuntoReciclaje {
         archivarPuntos();
         vista.getTxtId().setText("");
     }
+    
+    private void alternarRural() {
+        mostrarRural = !mostrarRural;
+        listarPuntos();
+    }
+    
+    private void alternarUrbano() {
+        mostrarUrbano = !mostrarUrbano;
+        listarPuntos();
+    }
+    
+    private void alternarIndustrial() {
+        mostrarIndustrial = !mostrarIndustrial;
+        listarPuntos();
+    }
 
     private void listarPuntos() {
         DefaultTableModel m = (DefaultTableModel) vista.getTabla().getModel();
         m.setNumRows(0);
 
         for (PuntoReciclaje p : modelo.ListarPuntos()) {
+            if (!mostrarRural && p.getSector().equalsIgnoreCase("rural")) continue;
+            if (!mostrarUrbano && p.getSector().equalsIgnoreCase("urbano")) continue;
+            if (!mostrarIndustrial && p.getSector().equalsIgnoreCase("industrial")) continue;
+            
             m.addRow(new Object[]{p.getId(), p.getNombre(), p.getDireccion(), p.getSector(), p.isDisponible() ? "Si" : "No"});
         }
     }
