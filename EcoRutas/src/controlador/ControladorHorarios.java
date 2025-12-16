@@ -7,16 +7,16 @@ import vista.*;
 import modelo.*;
 
 public class ControladorHorarios {
-    VistaHorarioRec vista;
-    GestorHorarioRecoleccion modelo;
+    private VistaHorarioRec vista;
+    private GestorHorarioRecoleccion modelo;
     
-    VistaMensajes vistaMensajes;
+    private VistaMensajes vistaMensajes;
     
-    boolean mostrarTipoOrganico;
-    boolean mostrarTipoGeneral;
-    boolean mostrarSectorUrbano;
-    boolean mostrarSectorRural;
-    boolean mostrarSectorIndustrial;
+    private boolean mostrarTipoOrganico;
+    private boolean mostrarTipoGeneral;
+    private boolean mostrarSectorUrbano;
+    private boolean mostrarSectorRural;
+    private boolean mostrarSectorIndustrial;
     
     public ControladorHorarios(GestorHorarioRecoleccion modelo, VistaHorarioRec vista) {
         this.vista = vista;
@@ -48,32 +48,32 @@ public class ControladorHorarios {
         cargarHorarios();
     }
     
-    public void alternarTipoGeneral() {
+    private void alternarTipoGeneral() {
         mostrarTipoGeneral = !mostrarTipoGeneral;
         listarHorarios();
     }
     
-    public void alternarTipoOrganico() {
+    private void alternarTipoOrganico() {
         mostrarTipoOrganico = !mostrarTipoOrganico;
         listarHorarios();
     }
     
-    public void alternarSectorRural() {
+    private void alternarSectorRural() {
         mostrarSectorRural = !mostrarSectorRural;
         listarHorarios();
     }
     
-    public void alternarSectorUrbano() {
+    private void alternarSectorUrbano() {
         mostrarSectorUrbano = !mostrarSectorUrbano;
         listarHorarios();
     }
     
-    public void alternarSectorIndustrial() {
+    private void alternarSectorIndustrial() {
         mostrarSectorIndustrial = !mostrarSectorIndustrial;
         listarHorarios();
     }
     
-    public void listarHorarios() {
+    private void listarHorarios() {
         DefaultTableModel m = (DefaultTableModel) vista.getTablaHorarios().getModel();
         m.setNumRows(0);
         
@@ -92,7 +92,7 @@ public class ControladorHorarios {
         }
     }
     
-    public void cargarHorarios() {
+    private void cargarHorarios() {
         try {
             modelo.cargarArchivo();
             listarHorarios();
