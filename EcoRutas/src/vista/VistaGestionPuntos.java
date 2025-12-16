@@ -228,6 +228,8 @@ public class VistaGestionPuntos extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Puntos de Reciclaje", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 18))); // NOI18N
 
+        jScrollPane1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
         tabla.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
