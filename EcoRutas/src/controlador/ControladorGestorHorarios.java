@@ -31,9 +31,7 @@ public class ControladorGestorHorarios {
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         vista.getBtnEliminar().addActionListener(e -> eliminarHorario());
 
-        cargarHorario();
-
-        vista.getBtnActualizar().addActionListener(e -> actualizarHorario());
+        cargarHorarios();
     }
 
     private void agregarHorario() {
@@ -139,10 +137,6 @@ public class ControladorGestorHorarios {
             int id = Integer.parseInt(vista.getTxtId().getText().trim());
             
             if (id < 1) throw new NumberFormatException();
-            modelo.eliminarHorarioPorId(id);
-            listarHorarios(); // Actualiza la lista automaticamente
-            archivarHorario();
-            vistaMensajes.mostrarInfo(null, "Horario eliminado exitosamente");
 
             return id;
         } catch (NumberFormatException e) {
@@ -162,7 +156,6 @@ public class ControladorGestorHorarios {
             return;
         }
 
-        modelo.eliminarHorarioPorId(id);
         listarHorarios(); // Actualiza la lista automaticamente
         archivarHorarios(); 
         vista.getTxtId().setText("");
@@ -197,16 +190,6 @@ public class ControladorGestorHorarios {
         }
     }
 
-    private void cargarHorario() {
-        try {
-            modelo.cargarArchivo();
-            listarHorarios();
-        } catch (FileNotFoundException e) {
-        } catch (IOException ex) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los Horarios");
-        }
-    }
-    
     // Pendientes:
     // - Filtrar
 }
