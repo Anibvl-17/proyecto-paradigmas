@@ -179,7 +179,7 @@ public class ControladorPuntoReciclaje {
             if (!mostrarUrbano && p.getSector().equalsIgnoreCase("urbano")) continue;
             if (!mostrarIndustrial && p.getSector().equalsIgnoreCase("industrial")) continue;
             
-            m.addRow(new Object[]{p.getId(), p.getNombre(), p.getDireccion(), p.getSector()});
+            m.addRow(new Object[]{p.getId(), p.getNombre(), p.getDireccion(), p.getSector(), p.totalContenedores()});
         }
     }
 
