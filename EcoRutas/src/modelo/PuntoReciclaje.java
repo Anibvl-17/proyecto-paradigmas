@@ -57,6 +57,10 @@ public class PuntoReciclaje {
             throw new IllegalArgumentException("Error: El nombre no puede estar vacio.");
         }
         
+        if (nombre.length() < 2 || nombre.length() > 35) {
+            throw new IllegalArgumentException("Error: El nombre debe tener entre 2 y 35 caracteres (tiene " + nombre.length() + ")");
+        }
+        
         // Solo se permiten letras, números y espacios
         if (!nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
             throw new IllegalArgumentException("Error: El nombre solo puede contener letras, números y espacios");
@@ -69,10 +73,15 @@ public class PuntoReciclaje {
             throw new IllegalArgumentException("Error: La direccion no puede estar vacia.");
         }
         
+        if (direccion.length() < 3 || direccion.length() > 35) {
+            throw new IllegalArgumentException("Error: La dirección debe tener entre 3 y 35 caracteres (tiene " + direccion.length() + ")");
+        }
+        
         // Solo se permiten letras, números y espacios
         if (!direccion.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
             throw new IllegalArgumentException("Error: La dirección solo puede tener letras, números y espacios");
         }
+        
         this.direccion = direccion;
     }
 
