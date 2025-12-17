@@ -45,7 +45,7 @@ public class Solicitud {
         
         // Solo se permiten letras, números y espacios
         if (!nombreSolicitante.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"))
-            throw new IllegalArgumentException("Error: La nombre del solicitante solo puede tener letras y espacios");
+            throw new IllegalArgumentException("Error: El nombre del solicitante solo puede tener letras y espacios");
         
         this.nombreSolicitante = nombreSolicitante;
     }
