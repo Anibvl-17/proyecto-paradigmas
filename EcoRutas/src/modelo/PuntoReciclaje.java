@@ -114,6 +114,15 @@ public class PuntoReciclaje {
     return count;
     }
     
+    public boolean aceptaTipo(String tipo) {
+        for (Contenedor c : contenedores.listarContenedores()) {
+            if (c.getTipo().equalsIgnoreCase(tipo))
+                return true;
+        }
+        
+        return false;
+    }
+    
     public int totalContenedores(){
         return contenedores.listarContenedores().size();
     }
