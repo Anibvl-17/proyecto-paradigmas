@@ -79,9 +79,9 @@ public class VistaAccesoFuncionario extends javax.swing.JFrame {
         radioBtnInspector = new javax.swing.JRadioButton();
         radioBtnEncargadoRec = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        txtContrasenia = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnAcceder = new javax.swing.JButton();
+        txtContrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -103,12 +103,6 @@ public class VistaAccesoFuncionario extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Contraseña");
-
-        txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseniaActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Seleccione un Rol");
 
@@ -149,8 +143,8 @@ public class VistaAccesoFuncionario extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAcceder))
+                    .addComponent(btnAcceder)
+                    .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
 
@@ -177,10 +171,6 @@ public class VistaAccesoFuncionario extends javax.swing.JFrame {
     private void radioBtnEncargadoRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBtnEncargadoRecActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioBtnEncargadoRecActionPerformed
-
-    private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseniaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,6 +205,6 @@ public class VistaAccesoFuncionario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton radioBtnEncargadoRec;
     private javax.swing.JRadioButton radioBtnInspector;
-    private javax.swing.JTextField txtContrasenia;
+    private javax.swing.JPasswordField txtContrasenia;
     // End of variables declaration//GEN-END:variables
 }

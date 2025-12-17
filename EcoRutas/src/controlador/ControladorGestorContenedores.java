@@ -33,6 +33,8 @@ public class ControladorGestorContenedores {
         vista.getBtnEliminar().addActionListener(e -> eliminarContenedor());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         
+        vista.getTxtCapacidadMaxima().requestFocus();
+        
         cargarContenedores();
     }
     
@@ -63,11 +65,11 @@ public class ControladorGestorContenedores {
             listarContenedores();
             archivarContenedores();
             limpiarFormulario();
-            vistaMensajes.mostrarInfo(null, "Contenedor actualizado exitosamente");
+            vistaMensajes.mostrarInfo("Contenedor actualizado exitosamente");
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: La capacidad máxima y actual deben ser números.");
+            vistaMensajes.mostrarError("Error: La capacidad máxima y actual deben ser números.");
         } catch (IllegalArgumentException e) {
-            vistaMensajes.mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(e.getMessage());
         }
     }
 
@@ -86,7 +88,7 @@ public class ControladorGestorContenedores {
             int capacidadActual = Integer.parseInt(vista.getTxtCapacidadActual().getText().trim());
             
             if (!modelo.actualizarContenedorPorId(id, new Contenedor(id, tipo, capacidadMaxima, capacidadActual, estado, color))) {
-                vistaMensajes.mostrarError(null, "Error: El contenedor con ID " + id + " no existe.");
+                vistaMensajes.mostrarError("Error: El contenedor con ID " + id + " no existe.");
                 return;
             }
             
@@ -94,12 +96,12 @@ public class ControladorGestorContenedores {
             archivarContenedores();
             limpiarFormulario();
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: La capacidad máxima y actual deben ser números.");
+            vistaMensajes.mostrarError("Error: La capacidad máxima y actual deben ser números.");
         } catch (IllegalArgumentException e) {
-            vistaMensajes.mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(e.getMessage());
         }
 
-        vistaMensajes.mostrarInfo(null, "Contenedor con ID " + id + " actualizado exitosamente");
+        vistaMensajes.mostrarInfo("Contenedor con ID " + id + " actualizado exitosamente");
         listarContenedores();
         archivarContenedores();
     }
@@ -111,11 +113,11 @@ public class ControladorGestorContenedores {
         if (id == -1) return;
 
         if (!modelo.eliminarContenedorPorId(id)) {
-            vistaMensajes.mostrarError(null, "Error: El contenedor con ID " + id + " no existe.");
+            vistaMensajes.mostrarError("Error: El contenedor con ID " + id + " no existe.");
             return;
         }
 
-        vistaMensajes.mostrarInfo(null, "El contenedor se eliminó exitosamente.");
+        vistaMensajes.mostrarInfo("El contenedor se eliminó exitosamente.");
         listarContenedores();
         archivarContenedores();
         vista.getTxtId().setText("");
@@ -151,7 +153,7 @@ public class ControladorGestorContenedores {
             
             return id;
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El id debe ser un número positivo");
+            vistaMensajes.mostrarError("Error: El id debe ser un número positivo");
             return -1;
         }
     }
@@ -160,8 +162,7 @@ public class ControladorGestorContenedores {
         try {
             modelo.archivar();
         } catch (IOException ex) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo guardar los contenedores");
-
+            vistaMensajes.mostrarError("Error: No se pudo guardar los contenedores");
         }
     }
 
@@ -172,7 +173,7 @@ public class ControladorGestorContenedores {
         } catch (FileNotFoundException e) {
             // No pasa nada, no se han guardado contenedores antes en este caso.
         } catch (IOException ex) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los contenedores");
+            vistaMensajes.mostrarError("Error: No se pudo cargar los contenedores");
         }
     }
 }

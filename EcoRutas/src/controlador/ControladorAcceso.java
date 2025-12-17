@@ -24,6 +24,7 @@ public class ControladorAcceso {
         vista.setVisible(true);
 
         vista.getBtnAcceder().addActionListener(e -> verificarAcceso());
+        vista.getTxtContrasenia().requestFocus();
     }
 
     // Verifica la contraseña y despliega la vista de acuerdo al rol selecccionado
@@ -38,7 +39,7 @@ public class ControladorAcceso {
             vista.setVisible(false);
             mostrarVistaEncargado();
         } else {
-            new VistaMensajes().mostrarError(null, "Contraseña incorrecta");
+            new VistaMensajes().mostrarError("Contraseña incorrecta");
         }
     }
 

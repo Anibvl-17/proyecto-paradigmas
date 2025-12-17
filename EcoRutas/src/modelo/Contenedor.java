@@ -61,8 +61,13 @@ public class Contenedor {
 
     public void setCapacidadMaxima(int capacidadMaxima) {
         if(capacidadMaxima < 0){
-            throw new IllegalArgumentException("Error: Capcidad máxima no puede contener números negativos.");
+            throw new IllegalArgumentException("Error: Capacidad máxima no puede contener números negativos.");
         }
+        
+        if (capacidadMaxima < 25 || capacidadMaxima > 25000) {
+            throw new IllegalArgumentException("Error: La capacidad máxima debe ser entre 25 y 25000");
+        }
+        
         this.capacidadMaxima = capacidadMaxima;
     }
 

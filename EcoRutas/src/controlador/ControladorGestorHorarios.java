@@ -12,11 +12,23 @@ public class ControladorGestorHorarios {
     private GestorHorarioRecoleccion modelo;
     
     private VistaMensajes vistaMensajes;
+    
+    private boolean mostrarTipoOrganico;
+    private boolean mostrarTipoGeneral;
+    private boolean mostrarSectorUrbano;
+    private boolean mostrarSectorRural;
+    private boolean mostrarSectorIndustrial;
 
     public ControladorGestorHorarios(GestorHorarioRecoleccion modelo, VistaGestionHorarioRec vista) {
         this.vista = vista;
         this.modelo = modelo;
         vistaMensajes = new VistaMensajes();
+        
+        mostrarTipoOrganico = true;
+        mostrarTipoGeneral = true;
+        mostrarSectorUrbano = true;
+        mostrarSectorRural = true;
+        mostrarSectorIndustrial = true;
     }
 
     public void iniciar() {
@@ -30,6 +42,17 @@ public class ControladorGestorHorarios {
         vista.getBtnActualizar().addActionListener( e -> actualizarHorario());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         vista.getBtnEliminar().addActionListener(e -> eliminarHorario());
+        
+        // Alterna los filtros de tipo de recoleccion
+        vista.getCbTipoGeneral().addActionListener(e -> alternarTipoGeneral());
+        vista.getCbTipoOrganico().addActionListener(e -> alternarTipoOrganico());
+       
+        // Alterna los filtros de sector
+        vista.getCbSectorRural().addActionListener(e -> alternarSectorRural());
+        vista.getCbSectorUrbano().addActionListener(e -> alternarSectorUrbano());
+        vista.getCbSectorIndustrial().addActionListener(e -> alternarSectorIndustrial());
+        
+        vista.getTxtHoraInicio().requestFocus();
 
         cargarHorarios();
     }
@@ -49,11 +72,11 @@ public class ControladorGestorHorarios {
             listarHorarios();
             archivarHorarios();
             limpiarFormulario();
-            vistaMensajes.mostrarInfo(null, "Horario agregado exitosamente");
+            vistaMensajes.mostrarInfo("Horario agregado exitosamente");
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
+            vistaMensajes.mostrarError("La hora de inicio y hora de fin deben ser números");
         } catch (IllegalArgumentException e) {
-            vistaMensajes.mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(e.getMessage());
         }
     }
     
@@ -66,7 +89,7 @@ public class ControladorGestorHorarios {
         HorarioRecoleccion horarioActual = modelo.buscarPorId(id);
         
         if (horarioActual == null) {
-            vistaMensajes.mostrarError(null, "Error: El horario con ID " + id + " no existe");
+            vistaMensajes.mostrarError("Error: El horario con ID " + id + " no existe");
             return;
         }
         
@@ -82,26 +105,60 @@ public class ControladorGestorHorarios {
             archivarHorarios();
             listarHorarios();
             limpiarFormulario();
-            vistaMensajes.mostrarInfo(null, "Horario actualizado exitosamente");
+            vistaMensajes.mostrarInfo("Horario actualizado exitosamente");
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "La hora de inicio y hora de fin deben ser números");
+            vistaMensajes.mostrarError("La hora de inicio y hora de fin deben ser números");
         } catch (IllegalArgumentException e) {
-            vistaMensajes.mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(e.getMessage());
         }
+    }
+    
+    private void alternarTipoGeneral() {
+        mostrarTipoGeneral = !mostrarTipoGeneral;
+        listarHorarios();
+    }
+    
+    private void alternarTipoOrganico() {
+        mostrarTipoOrganico = !mostrarTipoOrganico;
+        listarHorarios();
+    }
+    
+    private void alternarSectorRural() {
+        mostrarSectorRural = !mostrarSectorRural;
+        listarHorarios();
+    }
+    
+    private void alternarSectorUrbano() {
+        mostrarSectorUrbano = !mostrarSectorUrbano;
+        listarHorarios();
+    }
+    
+    private void alternarSectorIndustrial() {
+        mostrarSectorIndustrial = !mostrarSectorIndustrial;
+        listarHorarios();
     }
 
     private void listarHorarios() {
         DefaultTableModel m = (DefaultTableModel) vista.getTablaHorarios().getModel();
         m.setNumRows(0);
 
-        for (HorarioRecoleccion horario : modelo.listarHorarios()) {
+        for (HorarioRecoleccion h : modelo.listarHorarios()) {
+            // Filtra los tipos de recoleccion segun los filtros seleccionados
+            if (!mostrarTipoGeneral && h.getTipoResiduo().equalsIgnoreCase("general")) continue;
+            if (!mostrarTipoOrganico && h.getTipoResiduo().equalsIgnoreCase("orgánico")) continue;
+            
+            // Filtra los sectores de acuerdo a los filtros seleccionados de sector
+            if (!mostrarSectorRural && h.getSector().equalsIgnoreCase("rural")) continue;
+            if (!mostrarSectorUrbano && h.getSector().equalsIgnoreCase("urbano")) continue;
+            if (!mostrarSectorIndustrial && h.getSector().equalsIgnoreCase("industrial")) continue;
+            
             m.addRow(new Object[]{
-                horario.getId(),
-                horario.getSector(),
-                horario.getDiaSemana(),
-                horario.getHoraInicio(),
-                horario.getHoraFin(),
-                horario.getTipoResiduo()
+                h.getId(),
+                h.getSector(),
+                h.getDiaSemana(),
+                h.getHoraInicio(),
+                h.getHoraFin(),
+                h.getTipoResiduo()
             });
         }
     }
@@ -140,7 +197,7 @@ public class ControladorGestorHorarios {
 
             return id;
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El ID debe ser un número positivo");
+            vistaMensajes.mostrarError("Error: El ID debe ser un número positivo");
             return -1;
         }
     }
@@ -152,14 +209,14 @@ public class ControladorGestorHorarios {
         if (id == -1) return;
         
         if (!modelo.eliminarHorarioPorId(id)) {
-            vistaMensajes.mostrarError(null, "No existen horarios con id " + id);
+            vistaMensajes.mostrarError("No existen horarios con id " + id);
             return;
         }
 
         listarHorarios(); // Actualiza la lista automaticamente
         archivarHorarios(); 
         vista.getTxtId().setText("");
-        vistaMensajes.mostrarInfo(null, "Horario eliminado exitosamente");
+        vistaMensajes.mostrarInfo("Horario eliminado exitosamente");
     }
     
     private void cargarHorarios() {
@@ -169,7 +226,7 @@ public class ControladorGestorHorarios {
         } catch (FileNotFoundException e) {
             // No se ha creado el archivo, por lo tanto no hay horarios
         } catch (IOException e) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los horarios de recolección");
+            vistaMensajes.mostrarError("Error: No se pudo cargar los horarios de recolección");
         }
     }
     
@@ -177,19 +234,7 @@ public class ControladorGestorHorarios {
         try {
             modelo.archivar();
         } catch (IOException e) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo guardar los horarios de recolección");
+            vistaMensajes.mostrarError("Error: No se pudo guardar los horarios de recolección");
         }
     }
-    
-    private void archivarHorario() {
-        try {
-            modelo.archivar();
-        } catch (IOException ex) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo guardar los Horarios");
-
-        }
-    }
-
-    // Pendientes:
-    // - Filtrar
 }

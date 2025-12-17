@@ -8,15 +8,23 @@ import vista.*;
 
 public class ControladorPuntoReciclaje {
 
-    VistaGestionPuntos vista;
-    GestorPuntoReciclaje modelo;
+    private VistaGestionPuntos vista;
+    private GestorPuntoReciclaje modelo;
 
-    VistaMensajes vistaMensajes;
+    private VistaMensajes vistaMensajes;
+    
+    private boolean mostrarRural;
+    private boolean mostrarUrbano;
+    private boolean mostrarIndustrial;
 
     public ControladorPuntoReciclaje(GestorPuntoReciclaje modelo, VistaGestionPuntos vista) {
         this.vista = vista;
         this.modelo = modelo;
         vistaMensajes = new VistaMensajes();
+        
+        mostrarRural = true;
+        mostrarUrbano = true;
+        mostrarIndustrial = true;
     }
 
     public void iniciar() {
@@ -33,6 +41,13 @@ public class ControladorPuntoReciclaje {
         vista.getBtnEliminar().addActionListener(e -> eliminarPunto());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         vista.getBtnGestionSolicitudes().addActionListener(e -> mostrarGestionSolicitudes());
+        
+        // Filtros de sector
+        vista.getCbRural().addActionListener(e -> alternarRural());
+        vista.getCbUrbano().addActionListener(e -> alternarUrbano());
+        vista.getCbIndustrial().addActionListener(e -> alternarIndustrial());
+        
+        vista.getTxtNombre().requestFocus();
         
         cargarPuntos();
     }
@@ -53,7 +68,7 @@ public class ControladorPuntoReciclaje {
         }
 
         if (modelo.buscarPuntoPorId(id) == null) {
-            vistaMensajes.mostrarError(null, "Error: El punto con ID " + id + " no existe.");
+            vistaMensajes.mostrarError("Error: El punto con ID " + id + " no existe.");
             return;
         }
 
@@ -83,9 +98,9 @@ public class ControladorPuntoReciclaje {
             listarPuntos();
             archivarPuntos();
             limpiarFormulario();
-            vistaMensajes.mostrarInfo(null, "Punto de reciclaje agregado exitosamente");
+            vistaMensajes.mostrarInfo("Punto de reciclaje agregado exitosamente");
         } catch (IllegalArgumentException e) {
-            vistaMensajes.mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(e.getMessage());
         }
     }
 
@@ -98,7 +113,7 @@ public class ControladorPuntoReciclaje {
         PuntoReciclaje puntoActual = modelo.buscarPuntoPorId(id);
         
         if (puntoActual == null) {
-            vistaMensajes.mostrarError(null, "Error: El punto con ID " + id + " no existe.");
+            vistaMensajes.mostrarError("Error: El punto con ID " + id + " no existe.");
             return;
         }
         
@@ -115,15 +130,14 @@ public class ControladorPuntoReciclaje {
         try {
             modelo.actualizarPuntoPorId(id, new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
             
-            vistaMensajes.mostrarInfo(null, "Punto con ID " + id + " actualizado exitosamente");
+            vistaMensajes.mostrarInfo("Punto con ID " + id + " actualizado exitosamente");
             listarPuntos();
             archivarPuntos();
             limpiarFormulario();
         } catch (IllegalArgumentException e) {
-            vistaMensajes.mostrarError(null, e.getMessage());
+            vistaMensajes.mostrarError(e.getMessage());
         }
         
-
     }
 
     private void eliminarPunto() {
@@ -133,14 +147,29 @@ public class ControladorPuntoReciclaje {
             // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
             if (id == -1) return;
             
-            vistaMensajes.mostrarError(null, "Error: El punto con ID " + id + " no existe.");
+            vistaMensajes.mostrarError("Error: El punto con ID " + id + " no existe.");
             return;
         }
 
-        vistaMensajes.mostrarInfo(null, "El punto se eliminó exitosamente.");
+        vistaMensajes.mostrarInfo("El punto se eliminó exitosamente.");
         listarPuntos();
         archivarPuntos();
         vista.getTxtId().setText("");
+    }
+    
+    private void alternarRural() {
+        mostrarRural = !mostrarRural;
+        listarPuntos();
+    }
+    
+    private void alternarUrbano() {
+        mostrarUrbano = !mostrarUrbano;
+        listarPuntos();
+    }
+    
+    private void alternarIndustrial() {
+        mostrarIndustrial = !mostrarIndustrial;
+        listarPuntos();
     }
 
     private void listarPuntos() {
@@ -148,6 +177,10 @@ public class ControladorPuntoReciclaje {
         m.setNumRows(0);
 
         for (PuntoReciclaje p : modelo.ListarPuntos()) {
+            if (!mostrarRural && p.getSector().equalsIgnoreCase("rural")) continue;
+            if (!mostrarUrbano && p.getSector().equalsIgnoreCase("urbano")) continue;
+            if (!mostrarIndustrial && p.getSector().equalsIgnoreCase("industrial")) continue;
+            
             m.addRow(new Object[]{p.getId(), p.getNombre(), p.getDireccion(), p.getSector(), p.isDisponible() ? "Si" : "No"});
         }
     }
@@ -173,7 +206,7 @@ public class ControladorPuntoReciclaje {
             
             return id;
         } catch (NumberFormatException e) {
-            vistaMensajes.mostrarError(null, "Error: El id debe ser un número positivo");
+            vistaMensajes.mostrarError("Error: El id debe ser un número positivo");
             return -1;
         }
     }
@@ -182,7 +215,7 @@ public class ControladorPuntoReciclaje {
         try {
             modelo.archivar();
         } catch (IOException ex) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo guardar los puntos");
+            vistaMensajes.mostrarError("Error: No se pudo guardar los puntos");
 
         }
     }
@@ -194,7 +227,7 @@ public class ControladorPuntoReciclaje {
         } catch (FileNotFoundException e) {
             // No pasa nada, no se han guardado puntos antes en este caso.
         } catch (IOException ex) {
-            vistaMensajes.mostrarError(null, "Error: No se pudo cargar los puntos");
+            vistaMensajes.mostrarError("Error: No se pudo cargar los puntos");
         }
     }
 }
