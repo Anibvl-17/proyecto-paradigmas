@@ -11,10 +11,15 @@ public class ControladorContenedor {
     
     private VistaMensajes vistaMensajes;
     
+    private String tipoVisible;
+    private int umbralCapacidadMinima;
+    
     public ControladorContenedor(GestorContenedor modelo, VistaContenedores vista) {
         this.modelo = modelo;
         this.vista = vista;
         vistaMensajes = new VistaMensajes();
+        tipoVisible = "todos";
+        umbralCapacidadMinima = 0; // el limite maximo es 25 mil litros
     }
     
     public void iniciar() {
@@ -24,8 +29,30 @@ public class ControladorContenedor {
         listarContenedores();
         
         vista.getLabelId().setText(String.valueOf(modelo.getIdPunto()));
+        vista.getBtnFiltrar().addActionListener(e -> filtrar());
         
         vista.setVisible(true);
+        
+        vista.getTxtUmbralCapacidad().requestFocus();
+    }
+    
+    private void filtrar() {
+        tipoVisible = (String) vista.getComboBoxTipo().getSelectedItem();
+        
+        try {
+            String strUmbral = vista.getTxtUmbralCapacidad().getText().trim();
+            
+            if (!strUmbral.isBlank()) {
+                umbralCapacidadMinima = Integer.parseInt(strUmbral);
+                if (umbralCapacidadMinima < 0 || umbralCapacidadMinima > 25000) throw new NumberFormatException();
+            } else {
+                umbralCapacidadMinima = 0;
+            }
+            
+            listarContenedores();
+        } catch (NumberFormatException e) {
+            vistaMensajes.mostrarError("Error: El umbral debe ser entre 0 y 25000");
+        }
     }
     
     private void listarContenedores() {
@@ -36,7 +63,10 @@ public class ControladorContenedor {
             m.setNumRows(0);
             
             for (Contenedor c : modelo.listarContenedores()) {
-                m.addRow(new Object[]{c.getTipo(), c.getEstado(), c.getColor(), c.getCapacidadMaxima(), c.getCapacidadActual()});
+                if (!tipoVisible.equalsIgnoreCase("todos") && !tipoVisible.equalsIgnoreCase(c.getTipo())) continue;
+                if (umbralCapacidadMinima > c.getCapacidadMaxima() - c.getCapacidadActual()) continue;
+                
+                m.addRow(new Object[]{c.getTipo(), c.getEstado(), c.getColor(), c.getCapacidadMaxima(), c.getCapacidadMaxima() - c.getCapacidadActual()});
             }
             
         } catch (IOException e) {
