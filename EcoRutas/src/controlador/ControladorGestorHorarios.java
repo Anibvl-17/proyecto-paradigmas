@@ -208,11 +208,16 @@ public class ControladorGestorHorarios {
         // Si el id es -1, ya se mostró un mensaje de error y no continua con la operacion
         if (id == -1) return;
         
-        if (!modelo.eliminarHorarioPorId(id)) {
+        if (modelo.buscarPorId(id) == null) {
             vistaMensajes.mostrarError("No existen horarios con id " + id);
             return;
         }
-
+        
+        if (!vistaMensajes.confirmarEliminar("¿Está seguro que desea eliminar el horario " + id + "?")) {
+            return;
+        }
+        
+        modelo.eliminarHorarioPorId(id);
         listarHorarios(); // Actualiza la lista automaticamente
         archivarHorarios(); 
         vista.getTxtId().setText("");

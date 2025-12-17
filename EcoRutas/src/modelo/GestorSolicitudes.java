@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -69,6 +70,11 @@ public class GestorSolicitudes {
     }
 
     public void cargarArchivo() throws FileNotFoundException, IOException {
+        // Verifica si el archivo de solicitudes existe
+        // Se agregó para evitar error de que no encuentra el archivo al crear
+        // solicitudes cuando no existe ninguna solicitud (no hay archivo)
+        if (!new File(nombreArchivo).exists()) return;
+        
         solicitudes.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;

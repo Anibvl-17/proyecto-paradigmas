@@ -40,18 +40,25 @@ public class Solicitud {
         if (nombreSolicitante == null || nombreSolicitante.isBlank())
             throw new IllegalArgumentException("El nombre del solicitante no puede estar vacio");
         
-        if (nombreSolicitante.length() < 2)
-            throw new IllegalArgumentException("El nombre del solicitante debe tener al menos 2 caracteres");
+        if (nombreSolicitante.length() < 2 || nombreSolicitante.length() > 35)
+            throw new IllegalArgumentException("El nombre del solicitante debe tener entre 2 y 35 caracteres (tiene " + nombreSolicitante.length() + ")");
+        
+        // Solo se permiten letras, números y espacios
+        if (!nombreSolicitante.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$"))
+            throw new IllegalArgumentException("Error: El nombre del solicitante solo puede tener letras y espacios");
         
         this.nombreSolicitante = nombreSolicitante;
     }
 
     public void setMensaje(String mensaje) {
         if (mensaje == null || mensaje.isBlank())
-            throw new IllegalArgumentException("El mensaje no puede estar vacio");
+            throw new IllegalArgumentException("Error: El mensaje no puede estar vacio");
         
-        if (mensaje.length() < 8)
-            throw new IllegalArgumentException("El mensaje debe tener al menos 8 caracteres");
+        if (mensaje.length() < 8 || mensaje.length() > 100)
+            throw new IllegalArgumentException("Error: El mensaje debe tener entre 8 y 100 caracteres");
+        
+        if (!mensaje.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9., ]+$"))
+            throw new IllegalArgumentException("Error: El mensaje solo puede tener letras, números, espacios, puntos y comas");
         
         this.mensaje = mensaje;
     }
@@ -66,6 +73,5 @@ public class Solicitud {
         
         this.tipoSolicitud = tipoSolicitud;
     }
-    
     
 }

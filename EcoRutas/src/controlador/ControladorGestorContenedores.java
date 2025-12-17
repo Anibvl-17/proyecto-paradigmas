@@ -111,16 +111,21 @@ public class ControladorGestorContenedores {
         
         // Si el id es -1, ya se mostró un mensaje de error y no continua con la operacion
         if (id == -1) return;
-
-        if (!modelo.eliminarContenedorPorId(id)) {
+        
+        if (modelo.buscarContenedorPorId(id) == null) {
             vistaMensajes.mostrarError("Error: El contenedor con ID " + id + " no existe.");
             return;
         }
-
-        vistaMensajes.mostrarInfo("El contenedor se eliminó exitosamente.");
+        
+        if (!vistaMensajes.confirmarEliminar("¿Está seguro que desea eliminar el contenedor " + id + "?")) {
+            return;
+        }
+        
+        modelo.eliminarContenedorPorId(id);
         listarContenedores();
         archivarContenedores();
         vista.getTxtId().setText("");
+        vistaMensajes.mostrarInfo("El contenedor se eliminó exitosamente.");
     }
 
     private void listarContenedores() {

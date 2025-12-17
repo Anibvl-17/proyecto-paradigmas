@@ -413,12 +413,12 @@
                     <Column editable="false" title="Nombre" type="java.lang.String"/>
                     <Column editable="false" title="Direcci&#xf3;n" type="java.lang.String"/>
                     <Column editable="false" title="Sector" type="java.lang.String"/>
-                    <Column editable="false" title="Disponible" type="java.lang.Object"/>
+                    <Column editable="false" title="Total contenedores" type="java.lang.Integer"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="10" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>

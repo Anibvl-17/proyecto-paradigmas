@@ -87,7 +87,16 @@ public class ControladorPrincipal {
             m.setNumRows(0);
             
             for (PuntoReciclaje p : gestorPuntos.ListarPuntos()) {
-                m.addRow(new Object[] { p.getId(), p.getNombre(), p.getDireccion(), p.getSector() });
+                m.addRow(new Object[] { 
+                    p.getId(), 
+                    p.getNombre(), 
+                    p.getDireccion(), 
+                    p.getSector(),
+                    p.aceptaTipo("vidrio") ? "Si" : "No",
+                    p.aceptaTipo("papel y cartón") ? "Si" : "No",
+                    p.aceptaTipo("plástico") ? "Si" : "No",
+                    p.aceptaTipo("orgánico") ? "Si" : "No"
+                });
             }
         } catch (FileNotFoundException e) {
             // Archivo no encontrado, significa que no se han guardado puntos

@@ -5,16 +5,14 @@ public class PuntoReciclaje {
     private String nombre;
     private String direccion;
     private String sector;
-    private boolean disponible;
     private GestorContenedor contenedores;
     
     //Constructor
-    public PuntoReciclaje(int id, String nombre, String direccion, String sector, boolean disponible, GestorContenedor contenedores) {
+    public PuntoReciclaje(int id, String nombre, String direccion, String sector, GestorContenedor contenedores) {
         this.setId(id);
         this.setNombre(nombre);
         this.setDireccion(direccion);
         this.setSector(sector);
-        this.setDisponible(disponible);
         this.setContenedores(contenedores);
     }
     
@@ -35,10 +33,6 @@ public class PuntoReciclaje {
         return sector;
     }
 
-    public boolean isDisponible() {
-        return disponible;
-    }
-
     public GestorContenedor getContenedores() {
         return contenedores;
     }
@@ -56,6 +50,15 @@ public class PuntoReciclaje {
         if(nombre == null || nombre.isEmpty()){
             throw new IllegalArgumentException("Error: El nombre no puede estar vacio.");
         }
+        
+        if (nombre.length() < 2 || nombre.length() > 35) {
+            throw new IllegalArgumentException("Error: El nombre debe tener entre 2 y 35 caracteres (tiene " + nombre.length() + ")");
+        }
+        
+        // Solo se permiten letras, números y espacios
+        if (!nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
+            throw new IllegalArgumentException("Error: El nombre solo puede contener letras, números y espacios");
+        }
         this.nombre = nombre;
     }
 
@@ -63,6 +66,16 @@ public class PuntoReciclaje {
         if(direccion == null || direccion.isEmpty()){
             throw new IllegalArgumentException("Error: La direccion no puede estar vacia.");
         }
+        
+        if (direccion.length() < 3 || direccion.length() > 35) {
+            throw new IllegalArgumentException("Error: La dirección debe tener entre 3 y 35 caracteres (tiene " + direccion.length() + ")");
+        }
+        
+        // Solo se permiten letras, números y espacios
+        if (!direccion.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
+            throw new IllegalArgumentException("Error: La dirección solo puede tener letras, números y espacios");
+        }
+        
         this.direccion = direccion;
     }
 
@@ -71,10 +84,6 @@ public class PuntoReciclaje {
         throw new IllegalArgumentException("Error: Solo puede escoger sector entre (Urbano, Rural, Industrial).");
         }
         this.sector = sector;
-    }
-    
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
     }
 
     public void setContenedores(GestorContenedor contenedores) {
@@ -95,6 +104,15 @@ public class PuntoReciclaje {
     return count;
     }
     
+    public boolean aceptaTipo(String tipo) {
+        for (Contenedor c : contenedores.listarContenedores()) {
+            if (c.getTipo().equalsIgnoreCase(tipo))
+                return true;
+        }
+        
+        return false;
+    }
+    
     public int totalContenedores(){
         return contenedores.listarContenedores().size();
     }
@@ -106,7 +124,6 @@ public class PuntoReciclaje {
              + "\nNombre: " + nombre
              + "\nDirección: " + direccion
              + "\nSector: " + sector
-             + "\nDisponible: " + (disponible ? "Sí" : "No")
              + "\nTotal Contenedores: " + totalContenedores()
              + "\nContenedores Disponibles:" + contenedoresDisponibles()
              + "\n-----------------------------------------";

@@ -2,6 +2,7 @@ package controlador;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
 import vista.*;
@@ -91,10 +92,9 @@ public class ControladorPuntoReciclaje {
         String nombre = vista.getTxtNombre().getText().trim();
         String direccion = vista.getTxtDireccion().getText().trim();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
-        boolean disponible = true;
         GestorContenedor gestorContenedor = new GestorContenedor(id);
         try {
-            modelo.agregarPunto(new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
+            modelo.agregarPunto(new PuntoReciclaje(id, nombre, direccion, sector, gestorContenedor));
             listarPuntos();
             archivarPuntos();
             limpiarFormulario();
@@ -120,7 +120,6 @@ public class ControladorPuntoReciclaje {
         String nombre = vista.getTxtNombre().getText().trim();
         String direccion = vista.getTxtDireccion().getText().trim();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
-        boolean disponible = true;
         GestorContenedor gestorContenedor = puntoActual.getContenedores();
         
         // Si los campos estan vacíos, se reemplaza por el dato ya existente
@@ -128,7 +127,7 @@ public class ControladorPuntoReciclaje {
         if (direccion.isBlank()) direccion = puntoActual.getDireccion();
         
         try {
-            modelo.actualizarPuntoPorId(id, new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
+            modelo.actualizarPuntoPorId(id, new PuntoReciclaje(id, nombre, direccion, sector, gestorContenedor));
             
             vistaMensajes.mostrarInfo("Punto con ID " + id + " actualizado exitosamente");
             listarPuntos();
@@ -142,19 +141,24 @@ public class ControladorPuntoReciclaje {
 
     private void eliminarPunto() {
         int id = obtenerId();
-
-        if (!modelo.eliminarPuntoPorId(id)) {
-            // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
-            if (id == -1) return;
-            
+        
+        // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
+        if (id == -1) return;
+        
+        if (modelo.buscarPuntoPorId(id) == null) {
             vistaMensajes.mostrarError("Error: El punto con ID " + id + " no existe.");
             return;
         }
+        
+        if (!vistaMensajes.confirmarEliminar("¿Está seguro que desea eliminar el punto " + id + "?")) {
+            return;
+        }
 
-        vistaMensajes.mostrarInfo("El punto se eliminó exitosamente.");
+        modelo.eliminarPuntoPorId(id);
         listarPuntos();
         archivarPuntos();
         vista.getTxtId().setText("");
+        vistaMensajes.mostrarInfo("El punto se eliminó exitosamente.");
     }
     
     private void alternarRural() {
@@ -181,7 +185,7 @@ public class ControladorPuntoReciclaje {
             if (!mostrarUrbano && p.getSector().equalsIgnoreCase("urbano")) continue;
             if (!mostrarIndustrial && p.getSector().equalsIgnoreCase("industrial")) continue;
             
-            m.addRow(new Object[]{p.getId(), p.getNombre(), p.getDireccion(), p.getSector(), p.isDisponible() ? "Si" : "No"});
+            m.addRow(new Object[]{p.getId(), p.getNombre(), p.getDireccion(), p.getSector(), p.totalContenedores()});
         }
     }
 
