@@ -5,16 +5,14 @@ public class PuntoReciclaje {
     private String nombre;
     private String direccion;
     private String sector;
-    private boolean disponible;
     private GestorContenedor contenedores;
     
     //Constructor
-    public PuntoReciclaje(int id, String nombre, String direccion, String sector, boolean disponible, GestorContenedor contenedores) {
+    public PuntoReciclaje(int id, String nombre, String direccion, String sector, GestorContenedor contenedores) {
         this.setId(id);
         this.setNombre(nombre);
         this.setDireccion(direccion);
         this.setSector(sector);
-        this.setDisponible(disponible);
         this.setContenedores(contenedores);
     }
     
@@ -33,10 +31,6 @@ public class PuntoReciclaje {
 
     public String getSector() {
         return sector;
-    }
-
-    public boolean isDisponible() {
-        return disponible;
     }
 
     public GestorContenedor getContenedores() {
@@ -91,10 +85,6 @@ public class PuntoReciclaje {
         }
         this.sector = sector;
     }
-    
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
-    }
 
     public void setContenedores(GestorContenedor contenedores) {
         if (contenedores == null) {
@@ -134,7 +124,6 @@ public class PuntoReciclaje {
              + "\nNombre: " + nombre
              + "\nDirección: " + direccion
              + "\nSector: " + sector
-             + "\nDisponible: " + (disponible ? "Sí" : "No")
              + "\nTotal Contenedores: " + totalContenedores()
              + "\nContenedores Disponibles:" + contenedoresDisponibles()
              + "\n-----------------------------------------";

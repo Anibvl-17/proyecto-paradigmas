@@ -57,7 +57,6 @@ public class GestorPuntoReciclaje {
         punto.setNombre(nuevosDatos.getNombre());
         punto.setDireccion(nuevosDatos.getDireccion());
         punto.setSector(nuevosDatos.getSector());
-        punto.setDisponible(nuevosDatos.isDisponible());
         punto.setContenedores(nuevosDatos.getContenedores());
 
         return true;
@@ -66,15 +65,6 @@ public class GestorPuntoReciclaje {
     public  PuntoReciclaje buscarPorDireccion(String direccion) {
         for (PuntoReciclaje punto : puntos) {
             if(punto.getDireccion().equalsIgnoreCase(direccion)){
-                return punto;
-            }
-        }
-        return null;
-    }
-
-    public PuntoReciclaje buscarPuntosDisponibles() {
-        for (PuntoReciclaje punto : puntos) {
-            if(punto.isDisponible()){
                 return punto;
             }
         }
@@ -93,7 +83,7 @@ public class GestorPuntoReciclaje {
             for (PuntoReciclaje p : puntos) {
                 // No se guarda el gestor de contenedores aqui, ya que después se busca por el ID (el nombre del archivo tiene el ID)
                 // Cada GestorContenedores tiene un ID de un punto de reciclaje.
-                bw.write(p.getId() + ";" + p.getNombre() + ";" + p.getDireccion() + ";" + p.getSector() + ";" + p.isDisponible());
+                bw.write(p.getId() + ";" + p.getNombre() + ";" + p.getDireccion() + ";" + p.getSector());
                 bw.newLine();
             }
             bw.close();
@@ -112,7 +102,6 @@ public class GestorPuntoReciclaje {
                         partes[1],
                         partes[2],
                         partes[3],
-                        Boolean.parseBoolean(partes[4]),
                         cargarContenedoresPorIDPunto(Integer.parseInt(partes[0]))
                     )
                 );

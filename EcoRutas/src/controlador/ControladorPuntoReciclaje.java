@@ -91,10 +91,9 @@ public class ControladorPuntoReciclaje {
         String nombre = vista.getTxtNombre().getText().trim();
         String direccion = vista.getTxtDireccion().getText().trim();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
-        boolean disponible = true;
         GestorContenedor gestorContenedor = new GestorContenedor(id);
         try {
-            modelo.agregarPunto(new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
+            modelo.agregarPunto(new PuntoReciclaje(id, nombre, direccion, sector, gestorContenedor));
             listarPuntos();
             archivarPuntos();
             limpiarFormulario();
@@ -120,7 +119,6 @@ public class ControladorPuntoReciclaje {
         String nombre = vista.getTxtNombre().getText().trim();
         String direccion = vista.getTxtDireccion().getText().trim();
         String sector = (String) vista.getComboBoxSector().getSelectedItem();
-        boolean disponible = true;
         GestorContenedor gestorContenedor = puntoActual.getContenedores();
         
         // Si los campos estan vacíos, se reemplaza por el dato ya existente
@@ -128,7 +126,7 @@ public class ControladorPuntoReciclaje {
         if (direccion.isBlank()) direccion = puntoActual.getDireccion();
         
         try {
-            modelo.actualizarPuntoPorId(id, new PuntoReciclaje(id, nombre, direccion, sector, disponible, gestorContenedor));
+            modelo.actualizarPuntoPorId(id, new PuntoReciclaje(id, nombre, direccion, sector, gestorContenedor));
             
             vistaMensajes.mostrarInfo("Punto con ID " + id + " actualizado exitosamente");
             listarPuntos();
@@ -181,7 +179,7 @@ public class ControladorPuntoReciclaje {
             if (!mostrarUrbano && p.getSector().equalsIgnoreCase("urbano")) continue;
             if (!mostrarIndustrial && p.getSector().equalsIgnoreCase("industrial")) continue;
             
-            m.addRow(new Object[]{p.getId(), p.getNombre(), p.getDireccion(), p.getSector(), p.isDisponible() ? "Si" : "No"});
+            m.addRow(new Object[]{p.getId(), p.getNombre(), p.getDireccion(), p.getSector()});
         }
     }
 
