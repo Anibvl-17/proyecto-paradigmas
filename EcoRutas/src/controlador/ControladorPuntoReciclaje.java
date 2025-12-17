@@ -47,6 +47,8 @@ public class ControladorPuntoReciclaje {
         vista.getCbUrbano().addActionListener(e -> alternarUrbano());
         vista.getCbIndustrial().addActionListener(e -> alternarIndustrial());
         
+        vista.getTxtNombre().requestFocus();
+        
         cargarPuntos();
     }
     

@@ -24,6 +24,7 @@ public class ControladorAcceso {
         vista.setVisible(true);
 
         vista.getBtnAcceder().addActionListener(e -> verificarAcceso());
+        vista.getTxtContrasenia().requestFocus();
     }
 
     // Verifica la contraseña y despliega la vista de acuerdo al rol selecccionado

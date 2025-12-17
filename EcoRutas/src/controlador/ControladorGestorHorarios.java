@@ -51,6 +51,8 @@ public class ControladorGestorHorarios {
         vista.getCbSectorRural().addActionListener(e -> alternarSectorRural());
         vista.getCbSectorUrbano().addActionListener(e -> alternarSectorUrbano());
         vista.getCbSectorIndustrial().addActionListener(e -> alternarSectorIndustrial());
+        
+        vista.getTxtHoraInicio().requestFocus();
 
         cargarHorarios();
     }

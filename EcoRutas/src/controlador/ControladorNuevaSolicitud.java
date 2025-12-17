@@ -24,6 +24,8 @@ public class ControladorNuevaSolicitud {
         
         vista.getBtnCrear().addActionListener(e -> agregarSolicitud());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
+        
+        vista.getTxtNombre().requestFocus();
     }
     
     public void agregarSolicitud() {

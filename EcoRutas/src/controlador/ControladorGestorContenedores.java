@@ -33,6 +33,8 @@ public class ControladorGestorContenedores {
         vista.getBtnEliminar().addActionListener(e -> eliminarContenedor());
         vista.getBtnLimpiar().addActionListener(e -> limpiarFormulario());
         
+        vista.getTxtCapacidadMaxima().requestFocus();
+        
         cargarContenedores();
     }
     
