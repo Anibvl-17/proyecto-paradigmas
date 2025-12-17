@@ -34,6 +34,8 @@ public class ControladorGestorSolicitudes {
         vista.getCheckboxReclamos().addActionListener(e -> alternarFiltroReclamos());
         vista.getCheckboxSugerencias().addActionListener(e -> alternarFiltroSugerencias());
         
+        vista.getTxtId().requestFocus();
+        
         cargarSolicitudes();
     }
     
