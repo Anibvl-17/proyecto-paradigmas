@@ -2,6 +2,7 @@ package controlador;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.*;
 import vista.*;
@@ -140,19 +141,24 @@ public class ControladorPuntoReciclaje {
 
     private void eliminarPunto() {
         int id = obtenerId();
-
-        if (!modelo.eliminarPuntoPorId(id)) {
-            // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
-            if (id == -1) return;
-            
+        
+        // Si el id es -1, el mensajes ya se mostró en la función obtenerId()
+        if (id == -1) return;
+        
+        if (modelo.buscarPuntoPorId(id) == null) {
             vistaMensajes.mostrarError("Error: El punto con ID " + id + " no existe.");
             return;
         }
+        
+        if (!vistaMensajes.confirmarEliminar("¿Está seguro que desea eliminar el punto " + id + "?")) {
+            return;
+        }
 
-        vistaMensajes.mostrarInfo("El punto se eliminó exitosamente.");
+        modelo.eliminarPuntoPorId(id);
         listarPuntos();
         archivarPuntos();
         vista.getTxtId().setText("");
+        vistaMensajes.mostrarInfo("El punto se eliminó exitosamente.");
     }
     
     private void alternarRural() {

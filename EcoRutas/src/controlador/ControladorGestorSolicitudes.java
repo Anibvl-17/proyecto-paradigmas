@@ -55,10 +55,16 @@ public class ControladorGestorSolicitudes {
             
             if (id < 1) throw new NumberFormatException();
             
-            if (!modelo.eliminarSolicitudPorId(id)) {
+            if (modelo.buscarSolicitudPorId(id) == null) {
                 vistaMensajes.mostrarError("Error: La solicitud con ID " + id + " no existe");
+                return;
             }
             
+            if (!vistaMensajes.confirmarEliminar("¿Está seguro que desea eliminar la solicitud " + id + "?")) {
+                return;
+            }
+            
+            modelo.eliminarSolicitudPorId(id);
             archivarSolicitudes();
             listarSolicitudes();
             vista.getTxtId().setText("");
