@@ -56,12 +56,22 @@ public class PuntoReciclaje {
         if(nombre == null || nombre.isEmpty()){
             throw new IllegalArgumentException("Error: El nombre no puede estar vacio.");
         }
+        
+        // Solo se permiten letras, números y espacios
+        if (!nombre.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
+            throw new IllegalArgumentException("Error: El nombre solo puede contener letras, números y espacios");
+        }
         this.nombre = nombre;
     }
 
     public void setDireccion(String direccion) {
         if(direccion == null || direccion.isEmpty()){
             throw new IllegalArgumentException("Error: La direccion no puede estar vacia.");
+        }
+        
+        // Solo se permiten letras, números y espacios
+        if (!direccion.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]+$")) {
+            throw new IllegalArgumentException("Error: La dirección solo puede tener letras, números y espacios");
         }
         this.direccion = direccion;
     }
